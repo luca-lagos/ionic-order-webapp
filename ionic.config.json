@@ -1,0 +1,7 @@
+{
+  "name": "Ionic-order-webapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
