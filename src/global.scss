@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,24 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+/* Google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: bolder;
+}
+
+.subtitle {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.normal {
+    font-size: 14px;
+}
