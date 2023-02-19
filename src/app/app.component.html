@@ -1,31 +1,25 @@
 <ion-app>
-  <!--<ion-split-pane when="xs" contentId="main">
-    <ion-menu contentId="main">
-      <ion-header>
-        <ion-toolbar color="tertiary">
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding"> Menu Content </ion-content>
-    </ion-menu>
-
-    <div class="ion-page" id="main">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Main View</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding"> Main View Content </ion-content>
-    </div>
-    <ion-router-outlet id="main"></ion-router-outlet>
-  </ion-split-pane>-->
   <ion-menu contentId="main-content">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menu Content</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">This is the menu content.</ion-content>
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-label class="normal"
+          ><script
+            type="module"
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+          ></script>
+          <script
+            nomodule
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+          ></script>
+          <ion-icon name="pricetags-outline"></ion-icon> Productos</ion-label
+        >
+      </ion-item>
+    </ion-content>
   </ion-menu>
   <div class="ion-page" id="main-content">
     <ion-header>
