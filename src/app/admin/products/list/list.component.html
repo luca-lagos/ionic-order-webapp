@@ -1,0 +1,49 @@
+<ion-content class="ion-padding">
+  <div class="item-padding">
+    <ion-title class="title">Control de productos</ion-title>
+  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-searchbar
+        animated="true"
+        placeholder="Buscar producto"
+        (ionChange)="HandleChange($event)"
+      ></ion-searchbar>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-grid class="list-products">
+          <ion-row>
+            <ion-col size="6" size-md="4" size-lg="2" *ngFor="let result of results">
+              <ion-card>
+                <img alt="Silhouette of mountains" src="{{ result.image }}" />
+                <ion-card-header>
+                  <ion-card-title class="subtitle" [ngStyle]="{'text-align': 'center'}">{{ result.title }}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-buttons class="buttons-item">
+                    <ion-button>
+                      <ion-icon
+                        slot="icon-only"
+                        name="create-outline"
+                      ></ion-icon>
+                    </ion-button>
+                    <ion-button>
+                      <ion-icon
+                        slot="icon-only"
+                        name="trash-outline"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="ion-padding">
+    <ion-fab-button [routerLink]="['/admin/products/add']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

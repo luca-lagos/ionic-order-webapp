@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsComponent } from './products/products.component';
-
-
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
+import { FormComponent as ProductFormComponent } from './products/form/form.component';
+import { ListComponent as ProductListComponent } from './products/list/list.component';
 
 @NgModule({
-  declarations: [ProductsComponent],
-  imports: [
-    CommonModule
-  ]
+  declarations: [ProductFormComponent, ProductListComponent],
+  imports: [RouterModule,CommonModule, IonicModule],
 })
-export class AdminModule { }
+export class AdminModule {}

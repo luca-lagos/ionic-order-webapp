@@ -1,0 +1,13 @@
+.buttons-item{
+    display: flex;
+    justify-content: center;
+    gap: 5px !important;
+}
+
+@media screen and (max-width: 500px) {
+    .list-products{
+        max-height: 490px;
+        overflow-x: hidden !important;
+    }
+    
+}

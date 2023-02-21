@@ -1,0 +1,45 @@
+<ion-content class="ion-padding">
+  <div class="item-padding form-header">
+    <ion-title class="title">Añadir producto</ion-title>
+    <ion-icon
+      name="close-outline"
+      slot="end"
+      class="close-button"
+      (click)="goBack()"
+    ></ion-icon>
+  </div>
+
+  <ion-card>
+    <form action="" class="ion-padding">
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input
+            type="text"
+            inputmode="text"
+            placeholder="Ingrese el nombre"
+          ></ion-input>
+          <ion-note slot="helper">Ingrese un nombre correcto</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Precio</ion-label>
+          <ion-input
+            type="number"
+            inputmode="numeric"
+            placeholder="Ingrese el precio"
+          ></ion-input>
+          <ion-note slot="helper">Ingrese un nombre correcto</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Foto</ion-label>
+          <ion-buttons slot="end">
+            <ion-button
+              ><ion-icon slot="icon-only" name="images"></ion-icon
+            ></ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-list>
+      <ion-button type="submit" class="submit-button">Añadir</ion-button>
+    </form>
+  </ion-card>
+</ion-content>
