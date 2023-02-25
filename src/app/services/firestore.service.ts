@@ -26,7 +26,8 @@ export class FirestoreService {
     const collection = this.database.collection(path);
     return collection.doc(id).update(data);
   }
+
+  getId() {
+    return this.database.createId();
+  }
 }
-
-
-//SEGUIR EN VIDEO 7 MIN 10

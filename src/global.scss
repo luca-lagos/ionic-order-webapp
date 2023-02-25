@@ -45,3 +45,24 @@
 .normal {
     font-size: 14px;
 }
+
+ion-button{
+    cursor: pointer;
+}
+
+.close-button{
+    padding-right: 15px;
+    font-size: 30px;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.close-button:hover{
+    opacity: 1;
+}
+
+.item-padding{
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
