@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
 
   private path = 'Product/';
 
-  public results = [...this.productList];
+  public results: Product[] = [];
 
   constructor(
     public FirestoreService: FirestoreService,
@@ -30,6 +30,7 @@ export class ListComponent implements OnInit {
   getAllProducts() {
     this.FirestoreService.getAllDocs<Product>(this.path).subscribe((res) => {
       this.productList = res;
+      this.results = [...this.productList];
     });
   }
 

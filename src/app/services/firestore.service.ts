@@ -35,5 +35,3 @@ export class FirestoreService {
     return this.collection(path).doc(id).update(data);
   }
 }
-
-//SEGUIR EN VIDEO 8 MIN 13

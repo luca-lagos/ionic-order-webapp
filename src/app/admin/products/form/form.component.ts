@@ -88,13 +88,13 @@ export class FormComponent implements OnInit {
         image: '',
         date: new Date(),
       };
-      this.FirestoreService.addDoc(editProduct, this.path, editProduct.id)
+      this.FirestoreService.updateDoc(editProduct, this.path, editProduct.id)
         .then((res) => {
           this.LoadingService.loading.dismiss().then(() => {
             this.goBack();
           });
           this.ToastService.presentToast(
-            'Producto guardado con éxito',
+            'Producto actualizado con éxito',
             'checkmark-circle-outline',
             'success-toast'
           );
@@ -114,7 +114,7 @@ export class FormComponent implements OnInit {
             this.goBack();
           });
           this.ToastService.presentToast(
-            'Producto guardado con éxito',
+            'Producto registrado con éxito',
             'checkmark-circle-outline',
             'success-toast'
           );
