@@ -10,25 +10,56 @@
   </div>
 
   <ion-card>
-    <form (ngSubmit)="addProduct()" class="ion-padding" #form="ngForm">
+    <form
+      (ngSubmit)="addProduct()"
+      class="ion-padding"
+      #form="ngForm"
+      [formGroup]="ProductForm"
+    >
       <ion-list>
-        <ion-item>
+        <ion-item fill="solid">
           <ion-label position="floating">Nombre</ion-label>
           <ion-input
             type="text"
             inputmode="text"
             name="title"
+            formControlName="title"
+            [clearInput]="true"
             placeholder="Ingrese el nombre"
             [(ngModel)]="product.title"
             [required]="true"
           ></ion-input>
+          <ion-note
+            *ngIf="
+              (ProductForm.get('title')?.hasError('required') ||
+                ProductForm.get('title')?.hasError('minlength')) &&
+              ProductForm.get('title')?.touched!
+            "
+            slot="error"
+            >Contenido inválido</ion-note
+          >
         </ion-item>
         <ion-item>
           <ion-label>Tipo de producto</ion-label>
-          <ion-select placeholder="Seleccione una opción" [(ngModel)]="product.type" name="type" [required]="true">
+          <ion-select
+            interface="action-sheet"
+            placeholder="Seleccione una opción"
+            [(ngModel)]="product.type"
+            name="type"
+            formControlName="type"
+            [required]="true"
+          >
             <ion-select-option value="normal">Tradicional</ion-select-option>
             <ion-select-option value="promotion">Promoción</ion-select-option>
           </ion-select>
+          <ion-note
+            *ngIf="
+              ProductForm.get('type')?.hasError('required') &&
+              ProductForm.get('type')?.touched!
+            "
+            slot="error"
+            >Debe seleccionar una opción</ion-note
+          >
         </ion-item>
         <ion-item>
           <ion-label position="floating">Precio</ion-label>
@@ -36,10 +67,22 @@
             type="number"
             inputmode="numeric"
             name="price"
+            formControlName="price"
+            [clearInput]="true"
             placeholder="Ingrese el precio"
             [(ngModel)]="product.price"
             [required]="true"
-          ></ion-input>
+            >$
+          </ion-input>
+          <ion-note
+            *ngIf="
+              (ProductForm.get('price')?.hasError('required') ||
+                ProductForm.get('price')?.hasError('minlength')) &&
+              ProductForm.get('price')?.touched!
+            "
+            slot="error"
+            >Contenido inválido</ion-note
+          >
         </ion-item>
         <ion-item>
           <ion-label position="floating">Precio de oferta</ion-label>
@@ -47,10 +90,22 @@
             type="number"
             inputmode="numeric"
             name="offer_price"
+            formControlName="offer_price"
+            [clearInput]="true"
             placeholder="Ingrese el precio"
             [(ngModel)]="product.offer_price"
             [required]="true"
-          ></ion-input>
+            >$
+          </ion-input>
+          <ion-note
+            *ngIf="
+              (ProductForm.get('offer_price')?.hasError('required') ||
+                ProductForm.get('offer_price')?.hasError('minlength')) &&
+              ProductForm.get('offer_price')?.touched!
+            "
+            slot="error"
+            >Contenido inválido</ion-note
+          >
         </ion-item>
         <ion-item>
           <ion-label>Foto</ion-label>

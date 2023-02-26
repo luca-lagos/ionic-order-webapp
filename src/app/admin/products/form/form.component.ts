@@ -2,6 +2,12 @@ import { FirestoreService } from './../../../services/firestore.service';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Product } from 'src/app/models/model';
+import {
+  Validators,
+  FormControl,
+  FormBuilder,
+  FormGroup,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -9,12 +15,16 @@ import { Product } from 'src/app/models/model';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+  ProductForm: FormGroup = new FormGroup({});
+
   product: Product = {
+    id: this.FirestoreService.getId(),
     title: '',
     price: null,
     offer_price: null,
     type: '',
     image: '',
+    date: new Date(),
   };
 
   private path = 'Product/';
@@ -24,13 +34,20 @@ export class FormComponent implements OnInit {
     public FirestoreService: FirestoreService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.ProductForm = new FormGroup({
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+      type: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required]),
+      offer_price: new FormControl('', [Validators.required]),
+    });
+  }
 
   addProduct() {
-    const id = this.FirestoreService.getId();
-    console.log(id);
-    console.log(this.product);
-    this.FirestoreService.addDoc(this.product, this.path, id);
+    this.FirestoreService.addDoc(this.product, this.path, this.product.id);
     this.goBack();
   }
 
