@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { Product } from 'src/app/models/model';
 
 @Component({
   selector: 'app-list',
@@ -6,45 +8,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
+  productList: Product[] = [];
 
-  constructor() { }
+  private path = 'Product/';
 
-  public data = [
-    {
-      title: 'Amsterdam',
-      image: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-    },
-    {
-      title: 'Buenos Aires',
-      image: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-    },
-    {
-      title: 'Porto Alegre',
-      image: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-    },
-    {
-      title: 'Munich',
-      image: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-    },
-    {
-      title: 'Paris',
-      image: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-    },
-    {
-      title: 'Madrid',
-      image: 'https://ionicframework.com/docs/img/demos/thumbnail.svg',
-    },
-  ];
+  public results = [...this.productList];
 
-  public results = [...this.data];
+  constructor(public FirestoreService: FirestoreService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getAllProducts();
+  }
+
+  getAllProducts() {
+    this.FirestoreService.getAllDocs<Product>(this.path).subscribe((res) => {
+      this.productList = res;
+    });
+  }
 
   HandleChange(e: any) {
     const query = e.target.value.toLowerCase();
-    this.results = this.data.filter(
+    this.results = this.productList.filter(
       (r) => r.title.toLowerCase().indexOf(query) > -1
     );
   }
-
 }

@@ -17,6 +17,8 @@ import {
 export class FormComponent implements OnInit {
   ProductForm: FormGroup = new FormGroup({});
 
+  productList: Product[] = [];
+
   product: Product = {
     id: this.FirestoreService.getId(),
     title: '',
@@ -44,11 +46,19 @@ export class FormComponent implements OnInit {
       price: new FormControl('', [Validators.required]),
       offer_price: new FormControl('', [Validators.required]),
     });
+
+    this.getAllProducts();
   }
 
   addProduct() {
     this.FirestoreService.addDoc(this.product, this.path, this.product.id);
     this.goBack();
+  }
+
+  getAllProducts() {
+    this.FirestoreService.getAllDocs<Product>(this.path).subscribe((res) => {
+      this.productList = res;
+    });
   }
 
   goBack() {
