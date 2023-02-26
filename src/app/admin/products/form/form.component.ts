@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Product } from 'src/app/models/model';
+import { ActivatedRoute } from '@angular/router';
 import {
   Validators,
   FormControl,
@@ -33,15 +34,21 @@ export class FormComponent implements OnInit {
 
   private path = 'Product/';
 
+  private productRef: any;
+
+  public title: string = '';
+
+  public id: any = this.ActivatedRoute.snapshot.paramMap.get('id');
+
   constructor(
     private navCtrl: NavController,
     private LoadingService: LoadingService,
     private ToastService: ToastService,
-    public FirestoreService: FirestoreService
-  ) {}
-
-  ngOnInit() {
-    this.ProductForm = new FormGroup({
+    public FirestoreService: FirestoreService,
+    private ActivatedRoute: ActivatedRoute,
+    private FormBuilder: FormBuilder
+  ) {
+    this.ProductForm = this.FormBuilder.group({
       title: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -50,25 +57,77 @@ export class FormComponent implements OnInit {
       price: new FormControl('', [Validators.required]),
       offer_price: new FormControl('', [Validators.required]),
     });
+  }
 
-    this.getAllProducts();
+  ngOnInit() {
+    if (this.id !== null) {
+      this.title = 'Editar producto';
+      this.FirestoreService.getDoc(this.path, this.id).subscribe((res) => {
+        this.productRef = res;
+        this.ProductForm = this.FormBuilder.group({
+          title: [this.productRef.title],
+          type: [this.productRef.type],
+          price: [this.productRef.price],
+          offer_price: [this.productRef.offer_price],
+        });
+      });
+    } else {
+      this.title = 'Añadir producto';
+    }
   }
 
   onSubmit() {
-    this.FirestoreService.addDoc(this.product, this.path, this.product.id);
-    this.LoadingService.showLoading(
-      'Por favor espere...',
-      2000,
-      'crescent'
-    ).then(() => {
-      setTimeout(() => {
-        this.ToastService.presentToast(
-          'Producto guardado con éxito',
-          'checkmark-circle-outline'
-        );
-        this.goBack();
-      }, 2000);
-    });
+    this.LoadingService.showLoading('Por favor espere...', 'crescent');
+    if (this.id !== null) {
+      const editProduct: Product = {
+        id: this.id,
+        title: this.ProductForm.value['title'],
+        price: this.ProductForm.value['price'],
+        offer_price: this.ProductForm.value['offer_price'],
+        type: this.ProductForm.value['type'],
+        image: '',
+        date: new Date(),
+      };
+      this.FirestoreService.addDoc(editProduct, this.path, editProduct.id)
+        .then((res) => {
+          this.LoadingService.loading.dismiss().then(() => {
+            this.goBack();
+          });
+          this.ToastService.presentToast(
+            'Producto guardado con éxito',
+            'checkmark-circle-outline',
+            'success-toast'
+          );
+        })
+        .catch((err) => {
+          this.LoadingService.loading.dismiss();
+          this.ToastService.presentToast(
+            'Hubo un error, por favor vuelta a intentarlo',
+            'close-circle-outline',
+            'danger-toast'
+          );
+        });
+    } else {
+      this.FirestoreService.addDoc(this.product, this.path, this.product.id)
+        .then((res) => {
+          this.LoadingService.loading.dismiss().then(() => {
+            this.goBack();
+          });
+          this.ToastService.presentToast(
+            'Producto guardado con éxito',
+            'checkmark-circle-outline',
+            'success-toast'
+          );
+        })
+        .catch((err) => {
+          this.LoadingService.loading.dismiss();
+          this.ToastService.presentToast(
+            'Hubo un error, por favor vuelta a intentarlo',
+            'close-circle-outline',
+            'danger-toast'
+          );
+        });
+    }
   }
 
   getAllProducts() {

@@ -31,7 +31,7 @@ export class FirestoreService {
     return this.collection(path).doc(id).delete();
   }
 
-  updateDoc(path: string, id: string, data: any) {
+  updateDoc(data: any, path: string, id: string) {
     return this.collection(path).doc(id).update(data);
   }
 }

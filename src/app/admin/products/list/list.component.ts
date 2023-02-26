@@ -46,12 +46,21 @@ export class ListComponent implements OnInit {
           text: 'Eliminar',
           role: 'confirm',
           handler: () => {
-            this.FirestoreService.deleteDoc(this.path, item.id);
-            this.ToastService.presentToast(
-              'Producto eliminado con éxito',
-              'checkmark-circle-outline'
-            );
-            this.goRoot();
+            this.FirestoreService.deleteDoc(this.path, item.id)
+              .then((res) => {
+                this.ToastService.presentToast(
+                  'Producto eliminado con éxito',
+                  'checkmark-circle-outline',
+                  'success-toast'
+                );
+              })
+              .catch((err) => {
+                this.ToastService.presentToast(
+                  'Hubo un error, por favor intente de nuevo',
+                  'close-circle-outline',
+                  'danger-toast'
+                );
+              });
           },
         },
       ],

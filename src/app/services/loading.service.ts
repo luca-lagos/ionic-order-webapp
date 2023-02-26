@@ -5,15 +5,18 @@ import { LoadingController } from '@ionic/angular';
   providedIn: 'root',
 })
 export class LoadingService {
-  constructor(private loadingCtrl: LoadingController) {}
 
-  async showLoading(message: string, duration: number, spinner: any) {
-    const loading = await this.loadingCtrl.create({
+  public loading: any = null;
+
+  constructor(private loadingCtrl: LoadingController) {
+  }
+
+  async showLoading(message: string, spinner: any) {
+    this.loading = await this.loadingCtrl.create({
       message: message,
-      duration: duration,
-      spinner: spinner
+      spinner: spinner,
     });
 
-    await loading.present();
+    await this.loading.present();
   }
 }

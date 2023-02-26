@@ -6,11 +6,17 @@ import { FormComponent as ProductFormComponent } from './admin/products/form/for
 
 const routes: Routes = [
   {
+    path: '',
+    component: HomeComponent,
+  },
+  {
     path: 'home',
     component: HomeComponent,
   },
   {
     path: 'admin/products',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
     component: ProductListComponent,
   },
   {
@@ -20,10 +26,6 @@ const routes: Routes = [
   {
     path: 'admin/products/edit/:id',
     component: ProductFormComponent,
-  },
-  {
-    path: '',
-    component: HomeComponent,
   },
   {
     path: '**',

@@ -67,16 +67,30 @@ ion-button {
     padding-bottom: 20px;
 }
 
-.custom-toast {
+.success-toast {
     --background: rgb(45, 146, 90);
     --color: white;
 }
 
-.custom-toast::part(message) {
+.warning-toast {
+    --background: rgb(207, 177, 8);
+    --color: black;
+}
+
+.danger-toast {
+    --background: #c63f51;
+    --color: white;
+}
+
+.success-toast::part(message),
+.warning-toast::part(message),
+.danger-toast::part(message) {
     font-weight: 400;
 }
 
-.custom-toast::part(button) {
+.success-toast::part(button),
+.warning-toast::part(button),
+.danger-toast::part(button) {
     border-left: 1px solid white;
     color: white;
     font-size: 15px;

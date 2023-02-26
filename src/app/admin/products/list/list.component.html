@@ -14,9 +14,6 @@
       <div class="wrapper">
         <ion-grid class="list-products">
           <ion-row>
-            <ion-item>
-              <ion-spinner name="crescent"></ion-spinner>
-            </ion-item>
             <ion-col
               size="12"
               size-md="4"
@@ -43,13 +40,13 @@
                       'margin-top': '15px'
                     }"
                   >
-                    <ion-card-title class="subtitle">{{
+                    <ion-card-title class="subtitle">${{
                       item.offer_price
                     }}</ion-card-title>
                     <ion-card-title
                       class="normal"
                       [ngStyle]="{ 'text-decoration': 'line-through' }"
-                      >{{ item.price }}</ion-card-title
+                      >${{ item.price }}</ion-card-title
                     >
                   </div>
                   <div
@@ -78,8 +75,13 @@
                 </ion-card-header>
                 <ion-card-content>
                   <ion-buttons class="buttons-item">
-                    <ion-button>
-                      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                    <ion-button
+                      [routerLink]="['/admin/products/edit', item.id]"
+                    >
+                      <ion-icon
+                        slot="icon-only"
+                        name="create-outline"
+                      ></ion-icon>
                     </ion-button>
                     <ion-button (click)="deleteProduct(item)">
                       <ion-icon
