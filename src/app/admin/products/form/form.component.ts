@@ -1,6 +1,8 @@
 import { FirestoreService } from './../../../services/firestore.service';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { LoadingService } from 'src/app/services/loading.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { Product } from 'src/app/models/model';
 import {
   Validators,
@@ -33,6 +35,8 @@ export class FormComponent implements OnInit {
 
   constructor(
     private navCtrl: NavController,
+    private LoadingService: LoadingService,
+    private ToastService: ToastService,
     public FirestoreService: FirestoreService
   ) {}
 
@@ -50,9 +54,21 @@ export class FormComponent implements OnInit {
     this.getAllProducts();
   }
 
-  addProduct() {
+  onSubmit() {
     this.FirestoreService.addDoc(this.product, this.path, this.product.id);
-    this.goBack();
+    this.LoadingService.showLoading(
+      'Por favor espere...',
+      2000,
+      'crescent'
+    ).then(() => {
+      setTimeout(() => {
+        this.ToastService.presentToast(
+          'Producto guardado con éxito',
+          'checkmark-circle-outline'
+        );
+        this.goBack();
+      }, 2000);
+    });
   }
 
   getAllProducts() {

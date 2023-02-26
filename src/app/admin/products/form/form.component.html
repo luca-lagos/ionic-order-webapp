@@ -11,7 +11,7 @@
 
   <ion-card>
     <form
-      (ngSubmit)="addProduct()"
+      (ngSubmit)="onSubmit()"
       class="ion-padding"
       #form="ngForm"
       [formGroup]="ProductForm"
@@ -121,4 +121,10 @@
       >
     </form>
   </ion-card>
+  <ion-modal>
+    <ion-item>
+      <ion-label>Crescent</ion-label>
+      <ion-spinner name="crescent"></ion-spinner>
+    </ion-item>
+  </ion-modal>
 </ion-content>

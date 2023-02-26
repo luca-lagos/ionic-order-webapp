@@ -10,80 +10,91 @@
         (ionChange)="HandleChange($event)"
       ></ion-searchbar>
     </ion-card-header>
-    <ion-card-content>
-      <ion-grid class="list-products">
-        <ion-row>
-          <ion-col
-            size="6"
-            size-md="4"
-            size-lg="2"
-            *ngFor="let item of productList"
-          >
-            <ion-card>
-              <img
-                alt="Silhouette of mountains"
-                src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
-              />
-              <ion-card-header>
-                <ion-card-title
-                  class="subtitle"
-                  [ngStyle]="{ 'text-align': 'center' }"
-                  >{{ item.title }}</ion-card-title
-                >
-                <div
-                  [ngStyle]="{
-                    display: 'flex',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                    gap: '5px',
-                    'margin-top': '15px'
-                  }"
-                >
-                  <ion-card-title class="subtitle">{{
-                    item.offer_price
-                  }}</ion-card-title>
+    <ion-card-content [ngStyle]="{ display: 'flex' }">
+      <div class="wrapper">
+        <ion-grid class="list-products">
+          <ion-row>
+            <ion-item>
+              <ion-spinner name="crescent"></ion-spinner>
+            </ion-item>
+            <ion-col
+              size="12"
+              size-md="4"
+              size-lg="2"
+              *ngFor="let item of productList"
+            >
+              <ion-card>
+                <img
+                  alt="Silhouette of mountains"
+                  src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
+                />
+                <ion-card-header>
                   <ion-card-title
-                    class="normal"
-                    [ngStyle]="{ 'text-decoration': 'line-through' }"
-                    >{{ item.price }}</ion-card-title
+                    class="subtitle"
+                    [ngStyle]="{ 'text-align': 'center' }"
+                    >{{ item.title }}</ion-card-title
                   >
-                </div>
-                <div
-                  [ngStyle]="{
-                    width: '100%',
-                    display: 'flex',
-                    'justify-content': 'center'
-                  }"
-                >
-                  <ion-card-title
-                    class="normal"
+                  <div
                     [ngStyle]="{
-                      'text-align': 'center',
-                      'margin-top': '15px',
-                      'background-color':
-                        item.type === 'normal' ? '#2d5491' : '#822840',
-                      padding: '10px',
-                      'border-radius': '10px',
-                      'width': '50%'
+                      display: 'flex',
+                      'justify-content': 'center',
+                      'align-items': 'center',
+                      gap: '5px',
+                      'margin-top': '15px'
                     }"
-                    >{{ item.type === 'normal' ? 'Tradicional' : 'Promoción' }}</ion-card-title
                   >
-                </div>
-              </ion-card-header>
-              <ion-card-content>
-                <ion-buttons class="buttons-item">
-                  <ion-button>
-                    <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-                  </ion-button>
-                  <ion-button>
-                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-                  </ion-button>
-                </ion-buttons>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+                    <ion-card-title class="subtitle">{{
+                      item.offer_price
+                    }}</ion-card-title>
+                    <ion-card-title
+                      class="normal"
+                      [ngStyle]="{ 'text-decoration': 'line-through' }"
+                      >{{ item.price }}</ion-card-title
+                    >
+                  </div>
+                  <div
+                    [ngStyle]="{
+                      width: '100%',
+                      display: 'flex',
+                      'justify-content': 'center'
+                    }"
+                  >
+                    <ion-card-title
+                      class="normal"
+                      [ngStyle]="{
+                        'text-align': 'center',
+                        'margin-top': '15px',
+                        'background-color':
+                          item.type === 'normal' ? '#2d5491' : '#822840',
+                        padding: '10px',
+                        'border-radius': '10px',
+                        width: '50%'
+                      }"
+                      >{{
+                        item.type === "normal" ? "Tradicional" : "Promoción"
+                      }}</ion-card-title
+                    >
+                  </div>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-buttons class="buttons-item">
+                    <ion-button>
+                      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                    </ion-button>
+                    <ion-button (click)="deleteProduct(item)">
+                      <ion-icon
+                        slot="icon-only"
+                        color="danger"
+                        name="trash-outline"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
     </ion-card-content>
   </ion-card>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="ion-padding">

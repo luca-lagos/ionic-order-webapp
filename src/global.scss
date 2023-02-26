@@ -46,11 +46,11 @@
     font-size: 14px;
 }
 
-ion-button{
+ion-button {
     cursor: pointer;
 }
 
-.close-button{
+.close-button {
     padding-right: 15px;
     font-size: 30px;
     opacity: 0.7;
@@ -58,11 +58,26 @@ ion-button{
     transition: all 0.1s;
 }
 
-.close-button:hover{
+.close-button:hover {
     opacity: 1;
 }
 
-.item-padding{
+.item-padding {
     padding-top: 10px;
     padding-bottom: 20px;
+}
+
+.custom-toast {
+    --background: rgb(45, 146, 90);
+    --color: white;
+}
+
+.custom-toast::part(message) {
+    font-weight: 400;
+}
+
+.custom-toast::part(button) {
+    border-left: 1px solid white;
+    color: white;
+    font-size: 15px;
 }
