@@ -1,6 +1,6 @@
 <ion-content class="ion-padding">
   <div class="item-padding form-header">
-    <ion-title class="title">{{title}}</ion-title>
+    <ion-title class="title">{{ title }}</ion-title>
     <ion-icon
       name="close-outline"
       slot="end"
@@ -110,21 +110,31 @@
         <ion-item>
           <ion-label>Foto</ion-label>
           <ion-buttons slot="end">
-            <ion-button
-              ><ion-icon slot="icon-only" name="images"></ion-icon
-            ></ion-button>
+            <ion-button>
+              <label for="file-upload">
+                <ion-icon
+                  slot="icon-only"
+                  name="images"
+                  [ngStyle]="{ 'margin-top': '7px', cursor: 'pointer' }"
+                ></ion-icon>
+              </label>
+              <input
+                [ngStyle]="{ display: 'none' }"
+                id="file-upload"
+                type="file"
+                accept="image/"
+                (change)="uploadFile($event)"
+              />
+            </ion-button>
           </ion-buttons>
         </ion-item>
+        <div class="image-form" *ngIf="image.length !== 0">
+          <img [src]="image" alt="" />
+        </div>
       </ion-list>
       <ion-button type="submit" class="submit-button" [disabled]="form.invalid"
         >GUARDAR</ion-button
       >
     </form>
   </ion-card>
-  <ion-modal>
-    <ion-item>
-      <ion-label>Crescent</ion-label>
-      <ion-spinner name="crescent"></ion-spinner>
-    </ion-item>
-  </ion-modal>
 </ion-content>

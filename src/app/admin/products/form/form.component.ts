@@ -11,6 +11,7 @@ import {
   FormBuilder,
   FormGroup,
 } from '@angular/forms';
+import { FirestorageService } from 'src/app/services/firestorage.service';
 
 @Component({
   selector: 'app-form',
@@ -38,6 +39,8 @@ export class FormComponent implements OnInit {
 
   public title: string = '';
 
+  public image = '';
+
   public id: any = this.ActivatedRoute.snapshot.paramMap.get('id');
 
   constructor(
@@ -46,7 +49,8 @@ export class FormComponent implements OnInit {
     private ToastService: ToastService,
     public FirestoreService: FirestoreService,
     private ActivatedRoute: ActivatedRoute,
-    private FormBuilder: FormBuilder
+    private FormBuilder: FormBuilder,
+    public FirestorageService: FirestorageService
   ) {
     this.ProductForm = this.FormBuilder.group({
       title: new FormControl('', [
@@ -133,6 +137,19 @@ export class FormComponent implements OnInit {
   getAllProducts() {
     this.FirestoreService.getAllDocs<Product>(this.path).subscribe((res) => {
       this.productList = res;
+    });
+  }
+
+  async uploadFile(e: any) {
+    /*if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (image: any) => {
+        this.image = image.target.result as string;
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }*/
+    const res = await this.FirestorageService.uploadFile().then((res) => {
+      
     });
   }
 
