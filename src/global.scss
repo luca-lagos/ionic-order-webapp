@@ -95,3 +95,26 @@ ion-button {
     color: white;
     font-size: 15px;
 }
+
+.button-form {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+    .card-panel {
+        width: 65%;
+        margin: 0 auto;
+    }
+
+    .form-panel {
+        width: 50%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 400px) {
+    .button-form ion-button {
+        width: 50% !important;
+    }
+}

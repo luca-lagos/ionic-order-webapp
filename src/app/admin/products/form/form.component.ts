@@ -41,6 +41,8 @@ export class FormComponent implements OnInit {
 
   public image = '';
 
+  public file = '';
+
   public id: any = this.ActivatedRoute.snapshot.paramMap.get('id');
 
   constructor(
@@ -60,6 +62,7 @@ export class FormComponent implements OnInit {
       type: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
       offer_price: new FormControl('', [Validators.required]),
+      image: new FormControl('', [Validators.required]),
     });
   }
 
@@ -68,11 +71,13 @@ export class FormComponent implements OnInit {
       this.title = 'Editar producto';
       this.FirestoreService.getDoc(this.path, this.id).subscribe((res) => {
         this.productRef = res;
+        this.image = this.productRef.image;
         this.ProductForm = this.FormBuilder.group({
           title: [this.productRef.title],
           type: [this.productRef.type],
           price: [this.productRef.price],
           offer_price: [this.productRef.offer_price],
+          image: [this.image]
         });
       });
     } else {
@@ -80,7 +85,7 @@ export class FormComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.LoadingService.showLoading('Por favor espere...', 'crescent');
     if (this.id !== null) {
       const editProduct: Product = {
@@ -89,9 +94,16 @@ export class FormComponent implements OnInit {
         price: this.ProductForm.value['price'],
         offer_price: this.ProductForm.value['offer_price'],
         type: this.ProductForm.value['type'],
-        image: '',
+        image: this.image,
         date: new Date(),
       };
+      const name = this.ProductForm.value['title'];
+      const res = await this.FirestorageService.uploadFile(
+        this.file,
+        this.path,
+        name
+      );
+      this.ProductForm.value['image'] = res;
       this.FirestoreService.updateDoc(editProduct, this.path, editProduct.id)
         .then((res) => {
           this.LoadingService.loading.dismiss().then(() => {
@@ -112,6 +124,13 @@ export class FormComponent implements OnInit {
           );
         });
     } else {
+      const name = this.product.title;
+      const res = await this.FirestorageService.uploadFile(
+        this.file,
+        this.path,
+        name
+      );
+      this.product.image = res;
       this.FirestoreService.addDoc(this.product, this.path, this.product.id)
         .then((res) => {
           this.LoadingService.loading.dismiss().then(() => {
@@ -140,17 +159,15 @@ export class FormComponent implements OnInit {
     });
   }
 
-  async uploadFile(e: any) {
-    /*if (e.target.files && e.target.files[0]) {
+  async uploadFile($e: any) {
+    if ($e.target.files && $e.target.files[0]) {
+      this.file = $e.target.files[0];
       const reader = new FileReader();
       reader.onload = (image: any) => {
         this.image = image.target.result as string;
       };
-      reader.readAsDataURL(e.target.files[0]);
-    }*/
-    const res = await this.FirestorageService.uploadFile().then((res) => {
-      
-    });
+      reader.readAsDataURL($e.target.files[0]);
+    }
   }
 
   goBack() {
