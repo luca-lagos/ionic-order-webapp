@@ -1,9 +1,9 @@
 <ion-content class="ion-padding">
-  <div class="item-padding" [ngStyle]="{'text-align': 'center'}">
+  <div class="item-padding" [ngStyle]="{ 'text-align': 'center' }">
     <ion-title class="title">Control de productos</ion-title>
   </div>
   <ion-card class="card-panel">
-    <ion-card-header>
+    <ion-card-header *ngIf="productList?.length !== 0">
       <ion-searchbar
         animated="true"
         placeholder="Buscar producto"
@@ -11,12 +11,18 @@
       ></ion-searchbar>
     </ion-card-header>
     <ion-card-content [ngStyle]="{ display: 'flex' }">
-      <div class="empty-events" *ngIf="results?.length === 0">
-        <ion-icon name="alert-circle-outline"></ion-icon>
-        <p>No hay resultados</p>
-      </div>
       <ion-grid class="list-products">
-        <ion-row>
+        <div *ngIf="productList?.length === 0 && results?.length === 0" class="loading-spinner">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
+        <div
+          class="empty-events"
+          *ngIf="results?.length === 0 && productList?.length !== null"
+        >
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <p>No hay resultados</p>
+        </div>
+        <ion-row *ngIf="productList !== null">
           <ion-col
             size="12"
             size-md="4"

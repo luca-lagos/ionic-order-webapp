@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Product } from 'src/app/models/model';
 import { AlertController, NavController } from '@ionic/angular';
@@ -20,7 +23,7 @@ export class ListComponent implements OnInit {
     public FirestoreService: FirestoreService,
     private AlertController: AlertController,
     private navCtrl: NavController,
-    private ToastService: ToastService
+    private ToastService: ToastService,
   ) {}
 
   ngOnInit() {
@@ -29,8 +32,8 @@ export class ListComponent implements OnInit {
 
   getAllProducts() {
     this.FirestoreService.getAllDocs<Product>(this.path).subscribe((res) => {
-      this.productList = res;
-      this.results = [...this.productList];
+        this.productList = res;
+        this.results = [...this.productList];
     });
   }
 
