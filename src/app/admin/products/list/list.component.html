@@ -1,7 +1,9 @@
 <ion-content [scrollY]="false" class="ion-padding">
-  <div class="item-padding" [ngStyle]="{ 'text-align': 'center' }">
-    <ion-title class="title">Control de productos</ion-title>
-  </div>
+  <ion-card class="header-panel card-panel">
+    <ion-title class="title" [ngStyle]="{ color: 'white' }"
+      >Control de productos</ion-title
+    >
+  </ion-card>
   <ion-card class="card-panel">
     <ion-card-header *ngIf="productList?.length !== 0">
       <ion-searchbar
@@ -24,7 +26,7 @@
         >
           <ion-icon name="alert-circle-outline"></ion-icon>
           <p>No hay resultados</p>
-      </div>
+        </div>
         <ion-row *ngIf="productList !== null">
           <ion-col size="12" size-md="4" size-lg="4" *ngFor="let item of list">
             <ion-card>

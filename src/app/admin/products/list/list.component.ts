@@ -35,7 +35,8 @@ export class ListComponent implements OnInit {
     this.FirestoreService.getAllDocs<Product>(this.path).subscribe((res) => {
       this.productList = res;
       this.results = [...this.productList];
-      this.list = this.results.slice(0, this.showProducts);
+     /* this.list = this.results.slice(0, this.showProducts);*/
+     this.list = this.results;
     });
   }
 
