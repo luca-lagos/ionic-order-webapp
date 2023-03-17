@@ -3,6 +3,10 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ListComponent as ProductListComponent } from './admin/products/list/list.component';
 import { FormComponent as ProductFormComponent } from './admin/products/form/form.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { NewPasswordComponent } from './auth/new-password/new-password.component';
 
 const routes: Routes = [
   {
@@ -12,6 +16,22 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'auth/login',
+    component: LoginComponent,
+  },
+  {
+    path: 'auth/register',
+    component: RegisterComponent,
+  },
+  {
+    path: 'auth/new-password',
+    component: NewPasswordComponent,
+  },
+  {
+    path: 'my-profile',
+    component: ProfileComponent,
   },
   {
     path: 'admin/products',

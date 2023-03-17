@@ -7,3 +7,15 @@ export interface Product {
   image: string;
   date: Date;
 }
+
+export interface User {
+  id: string;
+  email: string;
+  password: string;
+  name: string;
+  lastname: string;
+  type: string;
+  location: string;
+  des_location: string;
+  image_profile: string;
+}

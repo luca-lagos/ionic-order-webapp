@@ -1,0 +1,149 @@
+<ion-content class="ion-padding">
+  <div class="item-padding form-header form-panel">
+    <ion-title class="title">Registrarme</ion-title>
+    <ion-icon
+      name="close-outline"
+      slot="end"
+      class="close-button"
+      (click)="goBack()"
+    ></ion-icon>
+  </div>
+
+  <ion-card class="form-panel">
+    <form
+      (ngSubmit)="onSubmit()"
+      class="ion-padding"
+      #form="ngForm"
+      [formGroup]="ProductForm"
+    >
+      <ion-list>
+        <ion-item fill="solid">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input
+            type="text"
+            inputmode="text"
+            name="title"
+            formControlName="title"
+            [clearInput]="true"
+            placeholder="Ingrese el nombre"
+            [(ngModel)]="product.title"
+            [required]="true"
+          ></ion-input>
+          <ion-note
+            *ngIf="
+              (ProductForm.get('title')?.hasError('required') ||
+                ProductForm.get('title')?.hasError('minlength')) &&
+              ProductForm.get('title')?.touched!
+            "
+            slot="error"
+            >Contenido inválido</ion-note
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label>Tipo de producto</ion-label>
+          <ion-select
+            interface="alert"
+            placeholder="Seleccione una opción"
+            [(ngModel)]="product.type"
+            name="type"
+            formControlName="type"
+            [required]="true"
+          >
+            <ion-select-option value="normal">Tradicional</ion-select-option>
+            <ion-select-option value="promotion">Promoción</ion-select-option>
+          </ion-select>
+          <ion-note
+            *ngIf="
+              ProductForm.get('type')?.hasError('required') &&
+              ProductForm.get('type')?.touched!
+            "
+            slot="error"
+            >Debe seleccionar una opción</ion-note
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Precio</ion-label>
+          <ion-input
+            type="number"
+            inputmode="numeric"
+            name="price"
+            formControlName="price"
+            [clearInput]="true"
+            placeholder="Ingrese el precio"
+            [(ngModel)]="product.price"
+            [required]="true"
+            >$
+          </ion-input>
+          <ion-note
+            *ngIf="
+              (ProductForm.get('price')?.hasError('required') ||
+                ProductForm.get('price')?.hasError('minlength')) &&
+              ProductForm.get('price')?.touched!
+            "
+            slot="error"
+            >Contenido inválido</ion-note
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Precio de oferta</ion-label>
+          <ion-input
+            type="number"
+            inputmode="numeric"
+            name="offer_price"
+            formControlName="offer_price"
+            [clearInput]="true"
+            placeholder="Ingrese el precio"
+            [(ngModel)]="product.offer_price"
+            [required]="true"
+            >$
+          </ion-input>
+          <ion-note
+            *ngIf="
+              (ProductForm.get('offer_price')?.hasError('required') ||
+                ProductForm.get('offer_price')?.hasError('minlength')) &&
+              ProductForm.get('offer_price')?.touched!
+            "
+            slot="error"
+            >Contenido inválido</ion-note
+          >
+        </ion-item>
+        <ion-item>
+          <ion-label>Foto</ion-label>
+          <ion-buttons slot="end">
+            <ion-button>
+              <label for="file-upload">
+                <ion-icon
+                  slot="icon-only"
+                  name="images"
+                  [ngStyle]="{ 'margin-top': '7px', cursor: 'pointer' }"
+                ></ion-icon>
+              </label>
+              <input
+                [ngStyle]="{ display: 'none' }"
+                id="file-upload"
+                type="file"
+                accept="image/"
+                name="image"
+                formControlName="image"
+                (change)="uploadFile($event)"
+                [(ngModel)]="product.image"
+                [required]="true"
+              />
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+        <div class="image-form" *ngIf="image.length !== 0">
+          <img [src]="image" alt="" />
+        </div>
+      </ion-list>
+      <div class="button-form">
+        <ion-button
+          type="submit"
+          class="submit-button"
+          [disabled]="form.invalid"
+          >GUARDAR</ion-button
+        >
+      </div>
+    </form>
+  </ion-card>
+</ion-content>

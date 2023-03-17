@@ -3,19 +3,18 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-import { FormComponent as ProductFormComponent } from './products/form/form.component';
-import { ListComponent as ProductListComponent } from './products/list/list.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { NewPasswordComponent } from './new-password/new-password.component';
 
 @NgModule({
-  declarations: [ProductFormComponent, ProductListComponent],
+  declarations: [LoginComponent, RegisterComponent, NewPasswordComponent],
   imports: [
-    RouterModule,
     CommonModule,
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    ScrollingModule
+    RouterModule,
   ],
 })
-export class AdminModule {}
+export class AuthModule {}
