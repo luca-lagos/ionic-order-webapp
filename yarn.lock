@@ -229,17 +229,17 @@
     "symbol-observable" "4.0.0"
     "yargs" "17.6.2"
 
-"@angular/common@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0", "@angular/common@^15.0.0", "@angular/common@^15.0.0 || ^16.0.0", "@angular/common@15.1.5":
-  "integrity" "sha512-52Ut/IeoM3avzV3Ts/ISkq7cc1FlA6dhLUq+L3ebY+Z8zZskCWjJWu4UgLGyVdtgSuAItyQm9CoZd+DrPLYtDA=="
-  "resolved" "https://registry.npmjs.org/@angular/common/-/common-15.1.5.tgz"
-  "version" "15.1.5"
+"@angular/common@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0", "@angular/common@^15.0.0 || ^16.0.0", "@angular/common@^15.2.3", "@angular/common@15.2.3":
+  "integrity" "sha512-J68CSb57XadC2weHw7kmHjCdrHNgxPv8ZW6KlnmYvIRJrkKsZuCl+PvFe90VMDvHtlBnSnz8sjAPqoUxesMRNg=="
+  "resolved" "https://registry.npmjs.org/@angular/common/-/common-15.2.3.tgz"
+  "version" "15.2.3"
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/compiler-cli@^15.0.0":
-  "integrity" "sha512-gWg6MpMJOpfkwf2zxHJDp9EGwORga4MLTkvugL+1KbN+lvx4Ac9Y0GinlJ4+EGpttvQlTYHzn8GabWhcdzzUiQ=="
-  "resolved" "https://registry.npmjs.org/@angular/compiler-cli/-/compiler-cli-15.1.5.tgz"
-  "version" "15.1.5"
+"@angular/compiler-cli@^15.0.0", "@angular/compiler-cli@^15.2.3":
+  "integrity" "sha512-n52yntOPnVeQdNq612YyQ1KW27+BZq1YIxtkST6Xmrv6rFuduLVtBLMl+CpZ3vONBzMI1fY6svck6fPb0x4kbQ=="
+  "resolved" "https://registry.npmjs.org/@angular/compiler-cli/-/compiler-cli-15.2.3.tgz"
+  "version" "15.2.3"
   dependencies:
     "@babel/core" "7.19.3"
     "@jridgewell/sourcemap-codec" "^1.4.14"
@@ -252,17 +252,17 @@
     "tslib" "^2.3.0"
     "yargs" "^17.2.1"
 
-"@angular/compiler@^15.0.0", "@angular/compiler@15.1.5":
-  "integrity" "sha512-4Ciswu3HKE+Pk+6Lhi6v3inZ01WkNBi9D33OKGC+7uEAjl8DCNF13rBXLyMF6tIFd+L98KYpzwUyQYk8FI/vgA=="
-  "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-15.1.5.tgz"
-  "version" "15.1.5"
+"@angular/compiler@^15.2.3", "@angular/compiler@15.2.3":
+  "integrity" "sha512-KdEb5vWptRON6lXhhu93DLog4ekfrlHD74bOWbGQ2F40mycXqLNigOxbDCYifIAeE0xmRxbyV9KBvS6LKLC9uA=="
+  "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-15.2.3.tgz"
+  "version" "15.2.3"
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/core@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0", "@angular/core@^15.0.0", "@angular/core@^15.0.0 || ^16.0.0", "@angular/core@>=12.0.0", "@angular/core@15.1.5":
-  "integrity" "sha512-JCbhGVaskqrstLB8CJoPtMQKH4gryhuLFUVL5cwbVy3UJGGNmc3Gzvk+9I7zDf/D08vKyXGGmBNBVx2J65SJgw=="
-  "resolved" "https://registry.npmjs.org/@angular/core/-/core-15.1.5.tgz"
-  "version" "15.1.5"
+"@angular/core@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0", "@angular/core@^15.0.0 || ^16.0.0", "@angular/core@^15.2.3", "@angular/core@>=12.0.0", "@angular/core@15.2.3":
+  "integrity" "sha512-e+d6upOqAyqE7MxxRthd1ZJILSKX+hXHCmujc48id8G3zhP0tD59iZ03KgUe8RMvXMlSBUhwOwDX39tr701eig=="
+  "resolved" "https://registry.npmjs.org/@angular/core/-/core-15.2.3.tgz"
+  "version" "15.2.3"
   dependencies:
     "tslib" "^2.3.0"
 
@@ -289,36 +289,36 @@
     "tslib" "^2.0.0"
     "winston" "^3.0.0"
 
-"@angular/forms@^15.0.0", "@angular/forms@>=12.0.0":
-  "integrity" "sha512-FnuEdyYs1o/DJepLpTsY2/GwKTEXJ7sZlQb+NKkRWOoGpA0E4nSbhn3aCUic++MTgbZyHO0rmFKnD8TI2yyJDA=="
-  "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-15.1.5.tgz"
-  "version" "15.1.5"
+"@angular/forms@^15.2.3", "@angular/forms@>=12.0.0":
+  "integrity" "sha512-+ZcmpmIah87JsPF2Nvh2QoklgW9hWXp4azMPrXsuxackZXKTl/xl8NY32WABQndbhVjtSj08SHCuKd0rPHvpGw=="
+  "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-15.2.3.tgz"
+  "version" "15.2.3"
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/language-service@^15.0.0":
-  "integrity" "sha512-jdvWZXcAn5Cei21HT8LhdKWMXcSzARURJXSFuX27IAfq74Jy9Z0et9QgHNDymX78N2Ti1/ZgjbdLNusDPvun0Q=="
-  "resolved" "https://registry.npmjs.org/@angular/language-service/-/language-service-15.1.5.tgz"
-  "version" "15.1.5"
+"@angular/language-service@^15.2.3":
+  "integrity" "sha512-tveGFaPNp3UHoXtemQPiWfyHTwQyEQY+vuOJaht9lfzlZGLZw5KfAqkuC0b7hEIpuKBb4EWhkXi8HwQY2ErzGQ=="
+  "resolved" "https://registry.npmjs.org/@angular/language-service/-/language-service-15.2.3.tgz"
+  "version" "15.2.3"
 
-"@angular/platform-browser-dynamic@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0", "@angular/platform-browser-dynamic@^15.0.0":
-  "integrity" "sha512-pPnNyXqnkeUcFAy6DHxeC26dS/Te55Lnf+Yjn3ijvxM6bUcLkdhoIUKEuuMRPOrRiBLk4Ha/rSCzr2GpJPlZog=="
-  "resolved" "https://registry.npmjs.org/@angular/platform-browser-dynamic/-/platform-browser-dynamic-15.1.5.tgz"
-  "version" "15.1.5"
+"@angular/platform-browser-dynamic@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0", "@angular/platform-browser-dynamic@^15.2.3":
+  "integrity" "sha512-HQ+xJzSa1O75s8Trcem8TnFu1rjbrzyRXfus/9Dpxam46ywIt1VuowSegz8K4hBaXnNFn53mZVpyK1hBtPq/bg=="
+  "resolved" "https://registry.npmjs.org/@angular/platform-browser-dynamic/-/platform-browser-dynamic-15.2.3.tgz"
+  "version" "15.2.3"
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/platform-browser@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0", "@angular/platform-browser@^15.0.0", "@angular/platform-browser@15.1.5":
-  "integrity" "sha512-epeESrWEt41W6i2NqIbGKNE0Oa1JfeDtKfMXtcjUNCgT76qS3zmC0G6irO8BOVbrwpA/YI4yYx1B9vTDUXYbEg=="
-  "resolved" "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-15.1.5.tgz"
-  "version" "15.1.5"
+"@angular/platform-browser@^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0", "@angular/platform-browser@^15.2.3", "@angular/platform-browser@15.2.3":
+  "integrity" "sha512-73EdTiw9jR/l/t9MBKD5slWcIiaE3bHQY4oCKzywMYu6ANci+WkCu7Ek2SGGq69M4+bKRo1/e/5XF4vvmNOBYQ=="
+  "resolved" "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-15.2.3.tgz"
+  "version" "15.2.3"
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/router@^15.0.0", "@angular/router@>=12.0.0":
-  "integrity" "sha512-1NXyXySE2/8aVjHk2e977b2uEDpKe3QIRSndpQXEmlqkQDPYKz8wwo4vyLlL5XK3k7pVKpcqDStvVyddD6YUvQ=="
-  "resolved" "https://registry.npmjs.org/@angular/router/-/router-15.1.5.tgz"
-  "version" "15.1.5"
+"@angular/router@^15.2.3", "@angular/router@>=12.0.0":
+  "integrity" "sha512-rbgAANRKsx6KPg/oTubyMjGfvSTh+42vj2/fUsARtIqi+kwr1FK/NM/64b1cv+oGYdxZsUkSxNPv4lONjh/DZg=="
+  "resolved" "https://registry.npmjs.org/@angular/router/-/router-15.2.3.tgz"
+  "version" "15.2.3"
   dependencies:
     "tslib" "^2.3.0"
 
@@ -8520,7 +8520,7 @@
   "resolved" "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   "version" "0.1.0"
 
-"zone.js@>=0.11.0", "zone.js@~0.11.4", "zone.js@~0.11.4 || ~0.12.0":
+"zone.js@>=0.11.0", "zone.js@~0.11.4", "zone.js@~0.11.4 || ~0.12.0 || ~0.13.0":
   "integrity" "sha512-82bctBg2hKcEJ21humWIkXRlLBBmrc3nN7DFh5LGGhcyycO2S7FN8NmdvlcKaGFDNVL4/9kFLmwmInTavdJERA=="
   "resolved" "https://registry.npmjs.org/zone.js/-/zone.js-0.11.8.tgz"
   "version" "0.11.8"
