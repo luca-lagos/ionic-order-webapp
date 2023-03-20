@@ -14,7 +14,7 @@
       (ngSubmit)="onSubmit()"
       class="ion-padding"
       #form="ngForm"
-      [formGroup]="ProductForm"
+      [formGroup]="UserForm"
     >
       <ion-list>
         <ion-item fill="solid">
@@ -22,86 +22,187 @@
           <ion-input
             type="text"
             inputmode="text"
-            name="title"
-            formControlName="title"
+            name="name"
+            formControlName="name"
             [clearInput]="true"
-            placeholder="Ingrese el nombre"
-            [(ngModel)]="product.title"
+            placeholder="Ingrese su nombre"
+            [(ngModel)]="user.name"
             [required]="true"
           ></ion-input>
           <ion-note
             *ngIf="
-              (ProductForm.get('title')?.hasError('required') ||
-                ProductForm.get('title')?.hasError('minlength')) &&
-              ProductForm.get('title')?.touched!
+              (UserForm.get('name')?.hasError('required') ||
+                UserForm.get('name')?.hasError('minlength')) &&
+              UserForm.get('name')?.touched!
             "
             slot="error"
             >Contenido inválido</ion-note
           >
         </ion-item>
-        <ion-item>
-          <ion-label>Tipo de producto</ion-label>
-          <ion-select
-            interface="alert"
-            placeholder="Seleccione una opción"
-            [(ngModel)]="product.type"
-            name="type"
-            formControlName="type"
-            [required]="true"
-          >
-            <ion-select-option value="normal">Tradicional</ion-select-option>
-            <ion-select-option value="promotion">Promoción</ion-select-option>
-          </ion-select>
-          <ion-note
-            *ngIf="
-              ProductForm.get('type')?.hasError('required') &&
-              ProductForm.get('type')?.touched!
-            "
-            slot="error"
-            >Debe seleccionar una opción</ion-note
-          >
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Precio</ion-label>
+        <ion-item fill="solid">
+          <ion-label position="floating">Apellido</ion-label>
           <ion-input
-            type="number"
-            inputmode="numeric"
-            name="price"
-            formControlName="price"
+            type="text"
+            inputmode="text"
+            name="lastname"
+            formControlName="lastname"
             [clearInput]="true"
-            placeholder="Ingrese el precio"
-            [(ngModel)]="product.price"
+            placeholder="Ingrese su apellido"
+            [(ngModel)]="user.lastname"
             [required]="true"
-            >$
-          </ion-input>
+          ></ion-input>
           <ion-note
             *ngIf="
-              (ProductForm.get('price')?.hasError('required') ||
-                ProductForm.get('price')?.hasError('minlength')) &&
-              ProductForm.get('price')?.touched!
+              (UserForm.get('lastname')?.hasError('required') ||
+                UserForm.get('lastname')?.hasError('minlength')) &&
+              UserForm.get('lastname')?.touched!
             "
             slot="error"
             >Contenido inválido</ion-note
           >
         </ion-item>
-        <ion-item>
-          <ion-label position="floating">Precio de oferta</ion-label>
+        <ion-item fill="solid">
+          <ion-label position="floating">Correo electrónico</ion-label>
           <ion-input
-            type="number"
-            inputmode="numeric"
-            name="offer_price"
-            formControlName="offer_price"
+            type="email"
+            inputmode="email"
+            name="email"
+            formControlName="email"
             [clearInput]="true"
-            placeholder="Ingrese el precio"
-            [(ngModel)]="product.offer_price"
+            placeholder="Ingrese su correo electrónico"
+            [(ngModel)]="user.email"
             [required]="true"
-            >$
-          </ion-input>
+          ></ion-input>
           <ion-note
             *ngIf="
-              (ProductForm.get('offer_price')?.hasError('required') ||
-                ProductForm.get('offer_price')?.hasError('minlength')) &&
-              ProductForm.get('offer_price')?.touched!
+              UserForm.get('email')?.hasError('required') &&
+              UserForm.get('email')?.touched!
+            "
+            slot="error"
+            >Ingrese su correo electrónico</ion-note
+          >
+          <ion-note
+            *ngIf="UserForm.get('email')?.hasError('email')"
+            slot="error"
+            >El formato del correo electrónico es inválido</ion-note
+          >
+        </ion-item>
+        <ion-item fill="solid">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input
+            type="password"
+            inputmode="password"
+            name="password"
+            formControlName="password"
+            [clearInput]="true"
+            placeholder="Ingrese su contraseña"
+            [(ngModel)]="user.password"
+            [required]="true"
+          ></ion-input>
+          <ion-note
+            *ngIf="
+              UserForm.get('password')?.hasError('required') &&
+              UserForm.get('password')?.touched!
+            "
+            slot="error"
+            >Ingrese su contraseña</ion-note
+          >
+          <ion-note
+            *ngIf="UserForm.get('password')?.hasError('pattern')"
+            slot="error"
+            >El formato de la contraseña es inválido</ion-note
+          >
+        </ion-item>
+        <ion-item fill="solid">
+          <ion-label position="floating">Confirmar contraseña</ion-label>
+          <ion-input
+            type="password"
+            inputmode="password"
+            name="confirm_password"
+            formControlName="confirm_password"
+            [clearInput]="true"
+            placeholder="Confirme su contraseña"
+            [required]="true"
+          ></ion-input>
+          <ion-note
+            *ngIf="
+              UserForm.get('confirm_password')?.hasError('required') &&
+              UserForm.get('confirm_password')?.touched!
+            "
+            slot="error"
+            >Confirme su contraseña</ion-note
+          >
+          <ion-note
+            *ngIf="UserForm.get('confirm_password')?.hasError('pattern')"
+            slot="error"
+            >El formato de la contraseña es inválido</ion-note
+          >
+          <ion-note
+            *ngIf="
+              UserForm.get('confirm_password')?.hasError('confirmedValidator')
+            "
+            slot="error"
+            >Las contraseñas no son idénticas</ion-note
+          >
+        </ion-item>
+        <ion-item fill="solid">
+          <ion-label position="floating">Dirección (Google Maps)</ion-label>
+          <ion-input
+            type="text"
+            inputmode="text"
+            name="location"
+            formControlName=""
+            [clearInput]="true"
+            placeholder="Ingrese su dirección"
+            [(ngModel)]="user.location"
+            [required]="true"
+          ></ion-input>
+          <ion-note
+            *ngIf="
+              (UserForm.get('location')?.hasError('required') ||
+                UserForm.get('location')?.hasError('minlength')) &&
+              UserForm.get('location')?.touched!
+            "
+            slot="error"
+            >Contenido inválido</ion-note
+          >
+        </ion-item>
+        <ion-item fill="solid">
+          <ion-label position="floating">Dirección (Google Maps)</ion-label>
+          <ion-input
+            type="text"
+            inputmode="text"
+            name="des_location"
+            formControlName=""
+            [clearInput]="true"
+            placeholder="Describa con detalle su dirección"
+            [(ngModel)]="user.des_location"
+            [required]="true"
+          ></ion-input>
+          <ion-note
+            *ngIf="
+              (UserForm.get('des_location')?.hasError('required') ||
+                UserForm.get('des_location')?.hasError('minlength')) &&
+              UserForm.get('des_location')?.touched!
+            "
+            slot="error"
+            >Contenido inválido</ion-note
+          >
+        </ion-item>
+        <ion-item fill="solid">
+          <ion-label position="floating">Dirección (Google Maps)</ion-label>
+          <ion-textarea
+            name="des_location"
+            formControlName="des_location"
+            placeholder="Describa con detalle su dirección"
+            [(ngModel)]="user.des_location"
+            [required]="true"
+          ></ion-textarea>
+          <ion-note
+            *ngIf="
+              (UserForm.get('des_location')?.hasError('required') ||
+                UserForm.get('des_location')?.hasError('minlength')) &&
+              UserForm.get('des_location')?.touched!
             "
             slot="error"
             >Contenido inválido</ion-note
@@ -119,14 +220,15 @@
                 ></ion-icon>
               </label>
               <input
+                title="file-upload"
                 [ngStyle]="{ display: 'none' }"
                 id="file-upload"
                 type="file"
                 accept="image/"
-                name="image"
-                formControlName="image"
+                name="img_profile"
+                formControlName="img_profile"
                 (change)="uploadFile($event)"
-                [(ngModel)]="product.image"
+                [(ngModel)]="user.img_profile"
                 [required]="true"
               />
             </ion-button>

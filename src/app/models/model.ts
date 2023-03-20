@@ -17,5 +17,5 @@ export interface User {
   type: string;
   location: string;
   des_location: string;
-  image_profile: string;
+  img_profile: string;
 }
