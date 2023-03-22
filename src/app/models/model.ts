@@ -14,6 +14,7 @@ export interface User {
   password: string;
   name: string;
   lastname: string;
+  phone: number | null;
   type: string;
   location: string;
   des_location: string;

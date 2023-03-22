@@ -14,6 +14,7 @@ import { FirestoreService } from './../../services/firestore.service';
 import { FirestorageService } from 'src/app/services/firestorage.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { FireauthService } from 'src/app/services/fireauth.service';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
     password: '',
     name: '',
     lastname: '',
+    phone: null,
     type: '',
     location: '',
     des_location: '',
@@ -63,7 +65,8 @@ export class RegisterComponent implements OnInit {
     public FirestoreService: FirestoreService,
     private ActivatedRoute: ActivatedRoute,
     private FormBuilder: FormBuilder,
-    public FirestorageService: FirestorageService
+    public FirestorageService: FirestorageService,
+    public FireauthService: FireauthService
   ) {
     this.UserForm = this.FormBuilder.group(
       {
@@ -78,6 +81,7 @@ export class RegisterComponent implements OnInit {
         email: new FormControl('', [Validators.required, Validators.email]),
         password: this.password,
         confirm_password: this.confirmPassword,
+        phone: new FormControl('', [Validators.required]),
         location: new FormControl('', [Validators.required]),
         des_location: new FormControl(''),
         img_profile: new FormControl('', [Validators.required]),
@@ -90,7 +94,17 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit() {}
+  async onSubmit() {
+    const credentials = {
+      email: this.user.email,
+      password: this.user.password,
+    };
+    const res = await this.FireauthService.register(
+      credentials.email,
+      credentials.password
+    );
+    console.log(res);
+  }
 
   async uploadFile($e: any) {
     if ($e.target.files && $e.target.files[0]) {

@@ -145,6 +145,29 @@
             >Las contraseñas no son idénticas</ion-note
           >
         </ion-item>
+        <ion-item>
+          <ion-label position="floating">Teléfono</ion-label>
+          <ion-input
+            type="number"
+            inputmode="numeric"
+            name="phone"
+            formControlName="phone"
+            [clearInput]="true"
+            placeholder="Ingrese su teléfono"
+            [(ngModel)]="user.phone"
+            [required]="true"
+            >$
+          </ion-input>
+          <ion-note
+            *ngIf="
+              (UserForm.get('phone')?.hasError('required') ||
+                UserForm.get('phone')?.hasError('minlength')) &&
+              UserForm.get('phone')?.touched!
+            "
+            slot="error"
+            >Contenido inválido</ion-note
+          >
+        </ion-item>
         <ion-item fill="solid">
           <ion-label position="floating">Dirección (Google Maps)</ion-label>
           <ion-input
@@ -168,33 +191,11 @@
           >
         </ion-item>
         <ion-item fill="solid">
-          <ion-label position="floating">Dirección (Google Maps)</ion-label>
-          <ion-input
-            type="text"
-            inputmode="text"
-            name="des_location"
-            formControlName=""
-            [clearInput]="true"
-            placeholder="Describa con detalle su dirección"
-            [(ngModel)]="user.des_location"
-            [required]="true"
-          ></ion-input>
-          <ion-note
-            *ngIf="
-              (UserForm.get('des_location')?.hasError('required') ||
-                UserForm.get('des_location')?.hasError('minlength')) &&
-              UserForm.get('des_location')?.touched!
-            "
-            slot="error"
-            >Contenido inválido</ion-note
-          >
-        </ion-item>
-        <ion-item fill="solid">
-          <ion-label position="floating">Dirección (Google Maps)</ion-label>
+          <ion-label position="floating">Descripción</ion-label>
           <ion-textarea
             name="des_location"
             formControlName="des_location"
-            placeholder="Describa con detalle su dirección"
+            placeholder="Si es necesario, describa con detalle su dirección"
             [(ngModel)]="user.des_location"
             [required]="true"
           ></ion-textarea>
@@ -243,7 +244,7 @@
           type="submit"
           class="submit-button"
           [disabled]="form.invalid"
-          >GUARDAR</ion-button
+          >REGISTRARME</ion-button
         >
       </div>
     </form>
