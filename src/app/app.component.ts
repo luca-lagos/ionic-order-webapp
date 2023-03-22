@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { FireauthService } from './services/fireauth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,13 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private menuController: MenuController) {}
+  constructor(private menuController: MenuController, public FireauthService: FireauthService) {}
 
   closeMenu() {
     this.menuController.close();
+  }
+
+  logOut(){
+    if()
   }
 }
