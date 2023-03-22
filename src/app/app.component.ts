@@ -14,7 +14,5 @@ export class AppComponent {
     this.menuController.close();
   }
 
-  logOut(){
-    if()
-  }
+  logOut(){}
 }
