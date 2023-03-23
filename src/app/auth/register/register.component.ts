@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
   UserForm: FormGroup = new FormGroup({});
 
   user: User = {
-    id: this.FirestoreService.getId(),
+    id: '',
     email: '',
     password: '',
     name: '',
@@ -81,7 +81,11 @@ export class RegisterComponent implements OnInit {
         email: new FormControl('', [Validators.required, Validators.email]),
         password: this.password,
         confirm_password: this.confirmPassword,
-        phone: new FormControl('', [Validators.required]),
+        phone: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(8),
+        ]),
         location: new FormControl('', [Validators.required]),
         des_location: new FormControl(''),
         img_profile: new FormControl('', [Validators.required]),
@@ -95,6 +99,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   async onSubmit() {
+    this.register();
+  }
+
+  async register() {
     const credentials = {
       email: this.user.email,
       password: this.user.password,
@@ -102,8 +110,46 @@ export class RegisterComponent implements OnInit {
     const res = await this.FireauthService.register(
       credentials.email,
       credentials.password
+    ).catch((err) => {
+      console.log(err);
+    });
+    const UID = await this.FireauthService.getUID();
+    this.user.id = UID;
+    this.addUser();
+  }
+
+  async addUser() {
+    this.LoadingService.showLoading('Por favor espere...', 'crescent');
+    const name = this.user.name;
+    const res = await this.FirestorageService.uploadFile(
+      this.file,
+      this.path,
+      name
     );
-    console.log(res);
+    this.user.img_profile = res;
+    this.FirestoreService.addDoc(this.user, this.path, this.user.id)
+      .then((res) => {
+        this.LoadingService.loading.dismiss().then(() => {
+          this.goBack();
+        });
+        this.ToastService.presentToast(
+          'Su cuenta ha sido creada con exito',
+          'checkmark-circle-outline',
+          'success-toast'
+        );
+      })
+      .catch((err) => {
+        this.LoadingService.loading.dismiss();
+        this.ToastService.presentToast(
+          'Hubo un error, por favor vuelta a intentarlo',
+          'close-circle-outline',
+          'danger-toast'
+        );
+      });
+  }
+
+  logOut() {
+    this.FireauthService.logOut();
   }
 
   async uploadFile($e: any) {

@@ -118,7 +118,9 @@
                   [ngStyle]="{ 'margin-top': '7px', cursor: 'pointer' }"
                 ></ion-icon>
               </label>
-              <input title="product-form"
+              <input 
+              #fileUpload
+              title="product-form"
                 [ngStyle]="{ display: 'none' }"
                 id="file-upload"
                 type="file"
@@ -132,7 +134,7 @@
             </ion-button>
           </ion-buttons>
         </ion-item>
-        <div class="image-form" *ngIf="image.length !== 0">
+        <div class="image-form" *ngIf="image.length !== 0 && fileUpload.value !== ''">
           <img [src]="image" alt="" />
         </div>
       </ion-list>

@@ -1,3 +1,121 @@
-<ion-content>
-  <p>HOLA LOGIN</p>
+<ion-content class="ion-padding">
+  <div class="item-padding form-header form-panel">
+    <ion-title class="title">Iniciar sesión</ion-title>
+    <ion-icon
+      name="close-outline"
+      slot="end"
+      class="close-button"
+      (click)="goBack()"
+    ></ion-icon>
+  </div>
+
+  <ion-card class="form-panel">
+    <form
+      (ngSubmit)="onSubmit()"
+      class="ion-padding"
+      #form="ngForm"
+      [formGroup]="LoginForm"
+    >
+      <ion-list>
+        <ion-item fill="solid">
+          <ion-label position="floating">Correo electrónico</ion-label>
+          <ion-input
+            type="email"
+            inputmode="email"
+            name="email"
+            formControlName="email"
+            [clearInput]="true"
+            placeholder="Ingrese su correo electrónico"
+            [required]="true"
+          ></ion-input>
+          <ion-note
+            *ngIf="
+              LoginForm.get('email')?.hasError('required') &&
+              LoginForm.get('email')?.touched!
+            "
+            slot="error"
+            >Ingrese su correo electrónico</ion-note
+          >
+          <ion-note
+            *ngIf="LoginForm.get('email')?.hasError('email')"
+            slot="error"
+            >El formato del correo electrónico es inválido</ion-note
+          >
+        </ion-item>
+        <ion-item fill="solid">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input
+            type="password"
+            inputmode="password"
+            name="password"
+            formControlName="password"
+            [clearInput]="true"
+            placeholder="Ingrese su contraseña"
+            [required]="true"
+          ></ion-input>
+          <ion-note
+            *ngIf="
+              LoginForm.get('password')?.hasError('required') &&
+              LoginForm.get('password')?.touched!
+            "
+            slot="error"
+            >Ingrese su contraseña</ion-note
+          >
+          <ion-note
+            *ngIf="LoginForm.get('password')?.hasError('pattern')"
+            slot="error"
+            >El formato de la contraseña es inválido</ion-note
+          >
+        </ion-item>
+      </ion-list>
+      <div class="button-form" [ngStyle]="{ marginTop: '25px' }">
+        <ion-button
+          type="submit"
+          class="submit-button"
+          [disabled]="form.invalid"
+          >INICIAR SESIÓN</ion-button
+        >
+      </div>
+      <hr
+        [ngStyle]="{
+          backgroundColor: 'white',
+          width: '40%',
+          margin: '15px auto'
+        }"
+      />
+      <div class="button-form">
+        <ion-button color="danger" [ngStyle]="{ fontWeight: 'bold' }"
+          >GOOGLE
+          <ion-icon
+            [ngStyle]="{ marginLeft: '10px', fontSize: '18px' }"
+            name="logo-google"
+          ></ion-icon
+        ></ion-button>
+      </div>
+      <div class="button-form">
+        <ion-button
+          color="tertiary"
+          [ngStyle]="{
+            fontWeight: 'bold'
+          }"
+          >FACEBOOK
+          <ion-icon
+            [ngStyle]="{ marginLeft: '10px', fontSize: '18px' }"
+            name="logo-facebook"
+          ></ion-icon
+        ></ion-button>
+      </div>
+      <hr
+        [ngStyle]="{
+          backgroundColor: 'white',
+          width: '40%',
+          margin: '15px auto'
+        }"
+      />
+      <div class="form-links" [ngStyle]="{ marginBottom: '15px' }">
+        <span [routerLink]="['/auth/register']">Registrarme</span>
+        <span>Olvidé mi contraseña</span>
+      </div>
+    </form>
+  </ion-card>
 </ion-content>

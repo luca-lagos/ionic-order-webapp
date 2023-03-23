@@ -156,7 +156,7 @@
             placeholder="Ingrese su teléfono"
             [(ngModel)]="user.phone"
             [required]="true"
-            >$
+            >
           </ion-input>
           <ion-note
             *ngIf="
@@ -174,7 +174,7 @@
             type="text"
             inputmode="text"
             name="location"
-            formControlName=""
+            formControlName="location"
             [clearInput]="true"
             placeholder="Ingrese su dirección"
             [(ngModel)]="user.location"
@@ -221,6 +221,7 @@
                 ></ion-icon>
               </label>
               <input
+                #fileUpload
                 title="file-upload"
                 [ngStyle]="{ display: 'none' }"
                 id="file-upload"
@@ -235,7 +236,7 @@
             </ion-button>
           </ion-buttons>
         </ion-item>
-        <div class="image-form" *ngIf="image.length !== 0">
+        <div class="image-form" *ngIf="image.length !== 0 && fileUpload.value !== ''">
           <img [src]="image" alt="" />
         </div>
       </ion-list>

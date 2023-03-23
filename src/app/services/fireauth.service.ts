@@ -20,6 +20,15 @@ export class FireauthService {
     return this.Auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }*/
 
+  async getUID(){
+    const user = await this.Auth.currentUser;
+    if(user === undefined){
+      return null;
+    } else {
+      return user?.uid;
+    }
+  }
+
   logOut() {
     this.Auth.signOut();
   }

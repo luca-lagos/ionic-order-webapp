@@ -9,7 +9,7 @@ export interface Product {
 }
 
 export interface User {
-  id: string;
+  id: any;
   email: string;
   password: string;
   name: string;
