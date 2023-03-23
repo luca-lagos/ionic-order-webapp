@@ -196,10 +196,10 @@
     "@angular-eslint/bundled-angular-compiler" "15.2.1"
     "@typescript-eslint/utils" "5.48.2"
 
-"@angular/cdk@^15.2.3":
-  "integrity" "sha512-zb9/7nVT7VdqJeQ2l10Ei2Uhm9Woc8msUUbE+VxNON3e7N2czbZeRpDdV/tyA46/9sgEvYcOXLCIB+8JkF5FwQ=="
-  "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-15.2.3.tgz"
-  "version" "15.2.3"
+"@angular/cdk@^15.2.4":
+  "integrity" "sha512-E4ZjDG12NdXHhCtask/5qzlgDzQ72vEbDoDd4I4ueI1rSUxFVyzRBt2vJwsAHbblO9kQoi/BOCXkJunR/T7r6g=="
+  "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-15.2.4.tgz"
+  "version" "15.2.4"
   dependencies:
     "tslib" "^2.3.0"
   optionalDependencies:
