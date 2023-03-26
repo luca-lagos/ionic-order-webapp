@@ -236,7 +236,7 @@
                 ></ion-icon>
               </label>
               <input
-                #fileUpload
+                #userUpload
                 title="file-upload"
                 [ngStyle]="{ display: 'none' }"
                 id="file-upload"
@@ -253,7 +253,7 @@
         </ion-item>
         <div
           class="image-form"
-          *ngIf="image.length !== 0 && fileUpload.value !== ''"
+          *ngIf="image.length !== 0 && userUpload.value !== ''"
         >
           <img [src]="image" alt="" />
         </div>
