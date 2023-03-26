@@ -114,7 +114,9 @@
       />
       <div class="form-links" [ngStyle]="{ marginBottom: '15px' }">
         <span [routerLink]="['/auth/register']">Registrarme</span>
-        <span>Olvidé mi contraseña</span>
+        <span [routerLink]="['/auth/forgot-password']"
+          >Olvidé mi contraseña</span
+        >
       </div>
     </form>
   </ion-card>

@@ -6,16 +6,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FormComponent as ProductFormComponent } from './products/form/form.component';
 import { ListComponent as ProductListComponent } from './products/list/list.component';
+import { FormComponent as UserFormComponent } from './users/form/form.component';
+import { ListComponent as UserListComponent } from './users/list/list.component';
 
 @NgModule({
-  declarations: [ProductFormComponent, ProductListComponent],
+  declarations: [
+    ProductFormComponent,
+    ProductListComponent,
+    UserFormComponent,
+    UserListComponent,
+  ],
   imports: [
     RouterModule,
     CommonModule,
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    ScrollingModule
+    ScrollingModule,
   ],
 })
 export class AdminModule {}

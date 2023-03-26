@@ -1,6 +1,6 @@
 <ion-content class="ion-padding">
   <div class="item-padding form-header form-panel">
-    <ion-title class="title">Registrarme</ion-title>
+    <ion-title class="title">{{ title }}</ion-title>
     <ion-icon
       name="close-outline"
       slot="end"
@@ -145,6 +145,30 @@
             >Las contraseñas no son idénticas</ion-note
           >
         </ion-item>
+        <ion-item>
+          <ion-label>Rol</ion-label>
+          <ion-select
+            interface="alert"
+            placeholder="Seleccione una opción"
+            [(ngModel)]="user.type"
+            name="type"
+            formControlName="type"
+            [required]="true"
+          >
+            <ion-select-option value="client">Cliente</ion-select-option>
+            <ion-select-option value="admin">Administrador</ion-select-option>
+            <ion-select-option value="chef">Cocinero</ion-select-option>
+            <ion-select-option value="delivery">Delivery</ion-select-option>
+          </ion-select>
+          <ion-note
+            *ngIf="
+              UserForm.get('type')?.hasError('required') &&
+              UserForm.get('type')?.touched!
+            "
+            slot="error"
+            >Debe seleccionar una opción</ion-note
+          >
+        </ion-item>
         <ion-item fill="solid">
           <ion-label position="floating">Teléfono</ion-label>
           <ion-input
@@ -156,7 +180,7 @@
             placeholder="Ingrese su teléfono"
             [(ngModel)]="user.phone"
             [required]="true"
-            >
+          >
           </ion-input>
           <ion-note
             *ngIf="
@@ -227,7 +251,10 @@
             </ion-button>
           </ion-buttons>
         </ion-item>
-        <div class="image-form" *ngIf="image.length !== 0 && fileUpload.value !== ''">
+        <div
+          class="image-form"
+          *ngIf="image.length !== 0 && fileUpload.value !== ''"
+        >
           <img [src]="image" alt="" />
         </div>
       </ion-list>
@@ -236,7 +263,7 @@
           type="submit"
           class="submit-button"
           [disabled]="form.invalid"
-          >REGISTRARME</ion-button
+          >GUARDAR</ion-button
         >
       </div>
     </form>

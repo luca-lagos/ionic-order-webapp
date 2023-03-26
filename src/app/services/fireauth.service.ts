@@ -6,7 +6,9 @@ import firebase from 'firebase/compat/app';
   providedIn: 'root',
 })
 export class FireauthService {
-  constructor(public Auth: AngularFireAuth) {}
+  constructor(public Auth: AngularFireAuth) {
+    this.getUID();
+  }
 
   loginCommon(email: string, password: string) {
     return this.Auth.signInWithEmailAndPassword(email, password);
@@ -20,20 +22,39 @@ export class FireauthService {
     return this.Auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }*/
 
-  async getUID(){
+  async getUID() {
     const user = await this.Auth.currentUser;
-    if(user === undefined){
+    if (user === undefined) {
       return null;
     } else {
       return user?.uid;
     }
   }
 
+  stateAuth(){
+    return this.Auth.authState;
+  }
+
   logOut() {
     this.Auth.signOut();
   }
 
-  register(email: string, password: string) {
-    return this.Auth.createUserWithEmailAndPassword(email, password);
+  async register(email: string, password: string) {
+    return await this.Auth.createUserWithEmailAndPassword(email, password).then(
+      () => {
+        this.sendCheckMail();
+      }
+    );
+  }
+
+  async sendCheckMail(): Promise<void> {
+    return await this.Auth.currentUser
+      .then((user) => {
+        return user?.sendEmailVerification();
+      });
+  }
+
+  async forgotPassword(email: string): Promise<void> {
+    return await this.Auth.sendPasswordResetEmail(email);
   }
 }

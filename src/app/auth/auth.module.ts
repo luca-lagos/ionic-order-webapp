@@ -6,10 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { NewPasswordComponent } from './new-password/new-password.component';
+import { SendCheckComponent } from './send-check/send-check.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, NewPasswordComponent],
+  declarations: [LoginComponent, RegisterComponent, ForgotPasswordComponent, SendCheckComponent],
   imports: [
     CommonModule,
     IonicModule,

@@ -32,7 +32,6 @@
     font-family: "Poppins", sans-serif !important;
 }
 
-
 .title {
     font-size: 22px;
     font-weight: bolder;
@@ -77,21 +76,21 @@ ion-button {
     border-radius: 10px;
 }
 
-.form-links{
+.form-links {
     width: 100%;
     display: flex;
     justify-content: center;
     gap: 20px;
 }
 
-.form-links span{
+.form-links span {
     color: white;
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
 }
 
-.form-links span:hover{
+.form-links span:hover {
     text-decoration: underline;
 }
 .close-button {
@@ -154,12 +153,82 @@ ion-button {
     width: 50% !important;
 }
 
-.google-button{
-    background-color: #Ee4335 !important;
+.google-button {
+    background-color: #ee4335 !important;
 }
 
-.facebook-button{
+.facebook-button {
     background-color: #3b5998 !important;
+}
+
+.loading-event {
+    width: 100%;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.loading-event ion-spinner {
+    margin: 0 auto;
+    width: 90px;
+    height: 90px;
+    color: #949494;
+    background-color: rgba(80, 80, 80, 0.5);
+    border-radius: 50%;
+}
+
+.loading-spinner {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.loading-spinner ion-spinner {
+    margin: 0 auto;
+    width: 90px;
+    height: 90px;
+    color: #949494;
+    background-color: rgba(80, 80, 80, 0.5);
+    border-radius: 50%;
+}
+
+.buttons-item {
+    display: flex;
+    justify-content: center;
+    gap: 5px !important;
+}
+
+.empty-events {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 10px 35px 10px;
+    color: #949494;
+}
+
+.empty-events p {
+    margin: 0;
+    font-size: 22px;
+}
+
+.empty-events ion-icon {
+    font-size: 100px;
+}
+
+.list-items {
+    display: block;
+    max-height: 600px;
+    overflow-x: hidden;
 }
 
 @media screen and (min-width: 768px) {
@@ -178,8 +247,18 @@ ion-button {
     }
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (max-width: 600px) {
+    .button-form {
+        width: 100% !important;
+    }
+
     .button-form ion-button {
         width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .list-items {
+        max-height: 490px;
     }
 }

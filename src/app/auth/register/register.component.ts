@@ -24,6 +24,8 @@ import { FireauthService } from 'src/app/services/fireauth.service';
 export class RegisterComponent implements OnInit {
   UserForm: FormGroup = new FormGroup({});
 
+  userList: User[] = [];
+
   user: User = {
     id: '',
     email: '',
@@ -31,7 +33,7 @@ export class RegisterComponent implements OnInit {
     name: '',
     lastname: '',
     phone: null,
-    type: '',
+    type: 'client',
     location: '',
     des_location: '',
     img_profile: '',
@@ -42,6 +44,8 @@ export class RegisterComponent implements OnInit {
   public image = '';
 
   public file = '';
+
+  uid = '';
 
   passwordsMatching = false;
   isConfirmPasswordDirty = false;
@@ -68,6 +72,11 @@ export class RegisterComponent implements OnInit {
     public FirestorageService: FirestorageService,
     public FireauthService: FireauthService
   ) {
+    this.FireauthService.stateAuth().subscribe((res) => {
+      if (res !== null) {
+        this.uid = res.uid;
+      }
+    });
     this.UserForm = this.FormBuilder.group(
       {
         name: new FormControl('', [
@@ -107,7 +116,7 @@ export class RegisterComponent implements OnInit {
       email: this.user.email,
       password: this.user.password,
     };
-    const res = await this.FireauthService.register(
+    await this.FireauthService.register(
       credentials.email,
       credentials.password
     ).catch((err) => {
@@ -119,8 +128,8 @@ export class RegisterComponent implements OnInit {
   }
 
   async addUser() {
-    this.LoadingService.showLoading('Por favor espere...', 'crescent');
-    const name = this.user.name;
+    this.LoadingService.showLoading('crescent');
+    const name = this.user.name + '_' + this.user.lastname;
     const res = await this.FirestorageService.uploadFile(
       this.file,
       this.path,
@@ -129,8 +138,9 @@ export class RegisterComponent implements OnInit {
     this.user.img_profile = res;
     this.FirestoreService.addDoc(this.user, this.path, this.user.id)
       .then((res) => {
+        this.FireauthService.sendCheckMail();
         this.LoadingService.loading.dismiss().then(() => {
-          this.goBack();
+          this.navCtrl.navigateRoot('auth/send-check');
         });
         this.ToastService.presentToast(
           'Su cuenta ha sido creada con exito',

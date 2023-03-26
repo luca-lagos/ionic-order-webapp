@@ -86,7 +86,7 @@ export class FormComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.LoadingService.showLoading('Por favor espere...', 'crescent');
+    this.LoadingService.showLoading('crescent');
     if (this.id !== null) {
       const editProduct: Product = {
         id: this.id,
@@ -151,12 +151,6 @@ export class FormComponent implements OnInit {
           );
         });
     }
-  }
-
-  getAllProducts() {
-    this.FirestoreService.getAllDocs<Product>(this.path).subscribe((res) => {
-      this.productList = res;
-    });
   }
 
   async uploadFile($e: any) {

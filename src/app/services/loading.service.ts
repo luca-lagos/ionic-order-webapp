@@ -11,10 +11,10 @@ export class LoadingService {
   constructor(private loadingCtrl: LoadingController) {
   }
 
-  async showLoading(message: string, spinner: any) {
+  async showLoading(spinner: any) {
     this.loading = await this.loadingCtrl.create({
-      message: message,
       spinner: spinner,
+      cssClass: 'loading-event'
     });
 
     await this.loading.present();

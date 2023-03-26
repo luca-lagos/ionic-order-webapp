@@ -3,10 +3,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ListComponent as ProductListComponent } from './admin/products/list/list.component';
 import { FormComponent as ProductFormComponent } from './admin/products/form/form.component';
+import { ListComponent as UserListComponent } from './admin/users/list/list.component';
+import { FormComponent as UserFormComponent } from './admin/users/form/form.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { NewPasswordComponent } from './auth/new-password/new-password.component';
+import { SendCheckComponent } from './auth/send-check/send-check.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -26,8 +29,12 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'auth/new-password',
-    component: NewPasswordComponent,
+    path: 'auth/forgot-password',
+    component: ForgotPasswordComponent,
+  },
+  {
+    path: 'auth/send-check',
+    component: SendCheckComponent,
   },
   {
     path: 'my-profile',
@@ -46,6 +53,20 @@ const routes: Routes = [
   {
     path: 'admin/products/edit/:id',
     component: ProductFormComponent,
+  },
+  {
+    path: 'admin/users',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+    component: UserListComponent,
+  },
+  {
+    path: 'admin/users/add',
+    component: UserFormComponent,
+  },
+  {
+    path: 'admin/users/edit/:id',
+    component: UserFormComponent,
   },
   {
     path: '**',

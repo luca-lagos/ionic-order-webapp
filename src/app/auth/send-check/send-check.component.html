@@ -1,0 +1,50 @@
+<ion-content class="ion-padding">
+  <div class="item-padding form-header form-panel">
+    <ion-title class="title">Verificar correo electrónico</ion-title>
+    <ion-icon
+      name="close-outline"
+      slot="end"
+      class="close-button"
+      (click)="goBack()"
+    ></ion-icon>
+  </div>
+  <ion-card class="form-panel">
+    <div
+      *ngIf="user$ | async as user; else loading"
+      [ngStyle]="{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '15px',
+        padding: '50px'
+      }"
+    >
+      <ion-card-title class="title" [ngStyle]="{textAlign: 'center'}">GRACIAS POR REGISTRARTE!</ion-card-title>
+      <ion-card-subtitle
+        class="normal"
+        [ngStyle]="{ margin: 'auto 50px auto 50px', textAlign: 'center' }"
+        >Te hemos enviado un correo de verificación a <strong [ngStyle]="{fontSize: '15px', color: 'white'}">{{user?.email}}</strong
+      ></ion-card-subtitle>
+      <p [ngStyle]="{ margin: 'auto 50px 0 50px', textAlign: 'center' }">
+        Por favor chequea tu correo electrónico y clickea en el link enviado
+        para terminar de verificar tu cuenta
+      </p>
+      <hr
+        [ngStyle]="{
+          backgroundColor: 'white',
+          width: '40%',
+          margin: '10px auto'
+        }"
+      />
+      <div class="button-form">
+        <ion-button (click)="onSendCheckMail()">REENVIAR CORREO</ion-button>
+      </div>
+    </div>
+    <ng-template #loading>
+      <div class="loading-spinner">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+    </ng-template>
+  </ion-card>
+</ion-content>

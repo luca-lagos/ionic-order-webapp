@@ -1,11 +1,11 @@
 <ion-content id="page-content" [scrollY]="false" class="ion-padding">
   <ion-card class="header-panel card-panel">
     <ion-title class="title" [ngStyle]="{ color: 'white' }"
-      >Control de productos</ion-title
+      >Control de usuarios</ion-title
     >
   </ion-card>
   <ion-card class="card-panel page-content">
-    <ion-card-header *ngIf="productList?.length !== 0">
+    <ion-card-header *ngIf="userList?.length !== 0">
       <ion-searchbar
         animated="true"
         placeholder="Buscar producto"
@@ -15,19 +15,19 @@
     <ion-card-content [ngStyle]="{ display: 'flex' }">
       <ion-grid class="list-items">
         <div
-          *ngIf="productList?.length === 0 && list?.length === 0"
+          *ngIf="userList?.length === 0 && list?.length === 0"
           class="loading-spinner"
         >
           <ion-spinner name="crescent"></ion-spinner>
         </div>
         <div
           class="empty-events"
-          *ngIf="list?.length === 0 && productList?.length !== 0"
+          *ngIf="list?.length === 0 && userList?.length !== 0"
         >
           <ion-icon name="alert-circle-outline"></ion-icon>
           <p>No hay resultados</p>
         </div>
-        <ion-row *ngIf="productList !== null">
+        <ion-row *ngIf="userList !== null">
           <ion-col size="12" size-md="4" size-lg="3" *ngFor="let item of list">
             <ion-card>
               <img
@@ -36,7 +36,7 @@
                   height: '250px',
                   'object-fit': 'cover'
                 }"
-                *ngIf="item.image === ''"
+                *ngIf="item.img_profile === ''"
                 alt=""
                 src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
               />
@@ -46,34 +46,22 @@
                   height: '250px',
                   'object-fit': 'cover'
                 }"
-                *ngIf="item.image !== ''"
-                src="{{ item.image }}"
+                *ngIf="item.img_profile !== ''"
+                src="{{ item.img_profile }}"
                 alt=""
               />
               <ion-card-header>
                 <ion-card-title
                   class="subtitle"
                   [ngStyle]="{ 'text-align': 'center' }"
-                  >{{ item.title }}</ion-card-title
+                  >{{ item.name }} {{ item.lastname }}</ion-card-title
                 >
-                <div
-                  [ngStyle]="{
-                    display: 'flex',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                    gap: '5px',
-                    'margin-top': '15px'
-                  }"
+                <ion-card-subtitle
+                  class="normal"
+                  [ngStyle]="{ 'text-align': 'center' }"
                 >
-                  <ion-card-title class="subtitle"
-                    >${{ item.offer_price }}</ion-card-title
-                  >
-                  <ion-card-title
-                    class="normal"
-                    [ngStyle]="{ 'text-decoration': 'line-through' }"
-                    >${{ item.price }}</ion-card-title
-                  >
-                </div>
+                  {{ item.email }}
+                </ion-card-subtitle>
                 <div
                   [ngStyle]="{
                     width: '100%',
@@ -93,17 +81,23 @@
                       width: '50%'
                     }"
                     >{{
-                      item.type === "normal" ? "Tradicional" : "Promoción"
+                      item.type === "client"
+                        ? "Cliente"
+                        : item.type === "admin"
+                        ? "Administrador"
+                        : item.type === "chef"
+                        ? "Cocinero"
+                        : "Delivery"
                     }}</ion-card-title
                   >
                 </div>
               </ion-card-header>
               <ion-card-content>
                 <ion-buttons class="buttons-item">
-                  <ion-button [routerLink]="['/admin/products/edit', item.id]">
+                  <ion-button [routerLink]="['/admin/users/edit', item.id]">
                     <ion-icon slot="icon-only" name="create-outline"></ion-icon>
                   </ion-button>
-                  <ion-button (click)="deleteProduct(item)">
+                  <ion-button (click)="deleteUser(item)">
                     <ion-icon
                       slot="icon-only"
                       color="danger"
@@ -130,7 +124,7 @@
     </ion-card-content>
   </ion-card>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="ion-padding">
-    <ion-fab-button [routerLink]="['/admin/products/add']">
+    <ion-fab-button [routerLink]="['/admin/users/add']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
