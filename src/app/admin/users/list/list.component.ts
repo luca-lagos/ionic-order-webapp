@@ -18,8 +18,6 @@ export class ListComponent implements OnInit {
 
   public list: any = [];
 
-  private showUsers: number = 3;
-
   constructor(
     public FirestoreService: FirestoreService,
     private AlertController: AlertController,
@@ -35,7 +33,6 @@ export class ListComponent implements OnInit {
     this.FirestoreService.getAllDocs<User>(this.path).subscribe((res) => {
       this.userList = res;
       this.results = [...this.userList];
-      /* this.list = this.results.slice(0, this.showProducts);*/
       this.list = this.results;
     });
   }
@@ -83,24 +80,9 @@ export class ListComponent implements OnInit {
         r.name.toLowerCase().indexOf(query) > -1 ||
         r.lastname.toLowerCase().indexOf(query) > -1 ||
         r.email.toLowerCase().indexOf(query) > -1 ||
-        r.toString().toLowerCase().indexOf(query) > -1 ||
-        r.type.toLowerCase().indexOf(query) > -1 ||
-        r.des_location.toLowerCase().indexOf(query) > -1
+        r.phone!.toString().toLowerCase().indexOf(query) > -1 ||
+        r.type.toLowerCase().indexOf(query) > -1
     );
-  }
-
-  loadData(e: any) {
-    setTimeout(() => {
-      this.showUsers += 3;
-      this.list = this.results.slice(0, this.showUsers);
-      e.target.complete();
-      if (
-        this.list[this.list.length - 1].id ===
-        this.userList[this.userList.length - 1].id
-      ) {
-        e.target.disabled = true;
-      }
-    }, 500);
   }
 
   goRoot() {

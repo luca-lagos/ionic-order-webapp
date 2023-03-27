@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FormComponent as ProductFormComponent } from './products/form/form.component';
 import { ListComponent as ProductListComponent } from './products/list/list.component';
 import { FormComponent as UserFormComponent } from './users/form/form.component';
@@ -22,7 +21,6 @@ import { ListComponent as UserListComponent } from './users/list/list.component'
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    ScrollingModule,
   ],
 })
 export class AdminModule {}

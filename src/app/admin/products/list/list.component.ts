@@ -18,13 +18,11 @@ export class ListComponent implements OnInit {
 
   public list: any = [];
 
-  private showProducts: number = 3;
-
   constructor(
     public FirestoreService: FirestoreService,
     private AlertController: AlertController,
     private navCtrl: NavController,
-    private ToastService: ToastService,
+    private ToastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -35,8 +33,7 @@ export class ListComponent implements OnInit {
     this.FirestoreService.getAllDocs<Product>(this.path).subscribe((res) => {
       this.productList = res;
       this.results = [...this.productList];
-     /* this.list = this.results.slice(0, this.showProducts);*/
-     this.list = this.results;
+      this.list = this.results;
     });
   }
 
@@ -79,22 +76,12 @@ export class ListComponent implements OnInit {
   HandleChange(e: any) {
     const query = e.target.value.toLowerCase();
     this.list = this.productList.filter(
-      (r) => r.title.toLowerCase().indexOf(query) > -1
+      (r) =>
+        r.title.toLowerCase().indexOf(query) > -1 ||
+        r.type.toLowerCase().indexOf(query) > -1 ||
+        r.price!.toString().toLowerCase().indexOf(query) > -1 ||
+        r.offer_price!.toString().toLowerCase().indexOf(query) > -1
     );
-  }
-
-  loadData(e: any) {
-    setTimeout(() => {
-      this.showProducts += 3;
-      this.list = this.results.slice(0, this.showProducts);
-      e.target.complete();
-      if (
-        this.list[this.list.length - 1].id ===
-        this.productList[this.productList.length - 1].id
-      ) {
-        e.target.disabled = true;
-      }
-    }, 500);
   }
 
   goRoot() {

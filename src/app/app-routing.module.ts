@@ -5,7 +5,9 @@ import { ListComponent as ProductListComponent } from './admin/products/list/lis
 import { FormComponent as ProductFormComponent } from './admin/products/form/form.component';
 import { ListComponent as UserListComponent } from './admin/users/list/list.component';
 import { FormComponent as UserFormComponent } from './admin/users/form/form.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { EditComponent as ProfileEditComponent } from './pages/my-profile/edit/edit.component';
+import { InfoComponent as ProfileInfoComponent } from './pages/my-profile/info/info.component';
+import { OrderComponent as ProfileOrderComponent } from './pages/my-profile/order/order.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { SendCheckComponent } from './auth/send-check/send-check.component';
@@ -38,7 +40,19 @@ const routes: Routes = [
   },
   {
     path: 'my-profile',
-    component: ProfileComponent,
+    loadChildren: () =>
+      import('./pages/pages.module').then((m) => m.PagesModule),
+    component: ProfileInfoComponent,
+  },
+  {
+    path: 'my-profile/edit',
+    component: ProfileEditComponent,
+  },
+  {
+    path: 'my-profile/order/:id',
+    loadChildren: () =>
+      import('./pages/pages.module').then((m) => m.PagesModule),
+    component: ProfileOrderComponent,
   },
   {
     path: 'admin/products',
