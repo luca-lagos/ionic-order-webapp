@@ -97,7 +97,7 @@ export class FormComponent implements OnInit {
         ]),
         location: new FormControl('', [Validators.required]),
         des_location: new FormControl(''),
-        img_profile: new FormControl('', [Validators.required]),
+        image: new FormControl('', [Validators.required]),
       },
       {
         validators: this.confirmedValidator('password', 'confirm_password'),
@@ -121,9 +121,8 @@ export class FormComponent implements OnInit {
           type: [this.userRef.type],
           location: [this.userRef.location],
           des_location: [this.userRef.des_location],
-          img_profile: [this.image],
+          image: [this.image],
         });
-        console.log(this.image);
       });
     } else {
       this.title = 'Añadir usuario';
@@ -147,16 +146,18 @@ export class FormComponent implements OnInit {
         type: this.UserForm.value['type'],
         location: this.UserForm.value['location'],
         des_location: this.UserForm.value['des_location'],
-        img_profile: this.image,
+        img_profile: this.UserForm.value['image'],
       };
       const name =
         this.UserForm.value['name'] + '_' + this.UserForm.value['lastname'];
-      const res = await this.FirestorageService.uploadFile(
-        this.file,
-        this.path,
-        name
-      );
-      this.UserForm.value['img_profile'] = res;
+      if (this.UserForm.value['image'] !== this.image) {
+        const res = await this.FirestorageService.uploadFile(
+          this.file,
+          this.path,
+          name
+        );
+        this.UserForm.value['image'] = res;
+      }
       this.FirestoreService.updateDoc(editUser, this.path, editUser.id)
         .then((res) => {
           this.LoadingService.loading.dismiss().then(() => {
@@ -223,6 +224,7 @@ export class FormComponent implements OnInit {
       };
       reader.readAsDataURL($e.target.files[0]);
     }
+    console.log(this.image);
   }
 
   confirmedValidator(controlName: string, matchingControlName: string) {

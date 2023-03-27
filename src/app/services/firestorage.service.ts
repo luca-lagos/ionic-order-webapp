@@ -1,7 +1,6 @@
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { finalize } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +31,3 @@ export class FirestorageService {
     });
   }
 }
-
-//SEGUIR EN VIDEO 12
