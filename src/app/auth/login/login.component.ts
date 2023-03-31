@@ -24,11 +24,9 @@ import { FireauthService } from 'src/app/services/fireauth.service';
 export class LoginComponent implements OnInit {
   LoginForm: FormGroup = new FormGroup({});
 
+  result: User[] = [];
+
   private path = 'User/';
-
-  public image = '';
-
-  public file = '';
 
   passwordsMatching = false;
   isConfirmPasswordDirty = false;
@@ -38,7 +36,7 @@ export class LoginComponent implements OnInit {
       /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
     ),
   ]);
-  
+
   constructor(
     private navCtrl: NavController,
     private LoadingService: LoadingService,
@@ -49,20 +47,87 @@ export class LoginComponent implements OnInit {
     public FirestorageService: FirestorageService,
     public FireauthService: FireauthService
   ) {
-    this.LoginForm = this.FormBuilder.group(
-      {
-        email: new FormControl('', [Validators.required, Validators.email]),
-        password: this.password,
-      }
-    );
+    this.LoginForm = this.FormBuilder.group({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: this.password,
+    });
   }
 
-  ngOnInit(
-    
-  ) {}
+  ngOnInit() {}
 
-  onSubmit(){
-    
+  onSubmit() {
+    this.LoadingService.showLoading('crescent');
+    const credentials = {
+      email: this.LoginForm.value['email'],
+      password: this.LoginForm.value['password'],
+    };
+    this.validateUser(credentials.email)
+      .then((res) => {
+        this.FireauthService.loginCommon(
+          credentials.email,
+          credentials.password
+        )
+          .then((res) => {
+            if (res.user?.emailVerified) {
+              this.LoadingService.loading.dismiss();
+              this.navCtrl.navigateRoot('');
+            } else {
+              this.LoadingService.loading.dismiss();
+              this.FireauthService.logOut();
+              this.ToastService.presentToast(
+                'La cuenta todavia no ha sido verificada, revise su bandeja de entrada!',
+                'alert-circle-outline',
+                'warning-toast'
+              );
+              this.FireauthService.logOut();
+            }
+          })
+          .catch((err) => {
+            const message = err.code;
+            this.LoadingService.loading.dismiss();
+            switch (message) {
+              case 'auth/wrong-password':
+                this.ToastService.presentToast(
+                  'La contraseña ingresada es incorrecta',
+                  'close-circle-outline',
+                  'danger-toast'
+                );
+                break;
+              case 'auth/user-not-found':
+                this.ToastService.presentToast(
+                  'No se ha encontrado la cuenta ingresada',
+                  'close-circle-outline',
+                  'danger-toast'
+                );
+                break;
+              default:
+                this.ToastService.presentToast(
+                  'Hubo un error, por favor vuelta a intentarlo',
+                  'close-circle-outline',
+                  'danger-toast'
+                );
+                break;
+            }
+          });
+      })
+      .catch((err) => {
+        this.LoadingService.loading.dismiss();
+        this.ToastService.presentToast(
+          'No existe un usuario registrado con el correo electrónico ingresado',
+          'close-circle-outline',
+          'danger-toast'
+        );
+      });
+  }
+
+  async validateUser(email: string) {
+    this.FirestoreService.getAllDocs<User>(this.path).subscribe((res) => {
+      this.result = res.filter((item) => item.email === email);
+    });
+    if (this.result.length > 0) {
+      return true;
+    }
+    return false;
   }
 
   goBack() {

@@ -56,11 +56,24 @@ export class ForgotPasswordComponent implements OnInit {
       })
       .catch((err) => {
         this.LoadingService.loading.dismiss();
-        this.ToastService.presentToast(
-          'Hubo un error, por favor vuelta a intentarlo',
-          'close-circle-outline',
-          'danger-toast'
-        );
+        const message = err.code;
+        console.log(message);
+        switch(message){
+          case 'auth/user-not-found':
+            this.ToastService.presentToast(
+              'No se ha encontrado la cuenta ingresada',
+              'close-circle-outline',
+              'danger-toast'
+            );
+            break;
+          default:
+            this.ToastService.presentToast(
+              'Hubo un error, por favor vuelta a intentarlo',
+              'close-circle-outline',
+              'danger-toast'
+            );
+            break;
+        }
       });
   }
 

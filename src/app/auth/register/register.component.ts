@@ -81,19 +81,18 @@ export class RegisterComponent implements OnInit {
       {
         name: new FormControl('', [
           Validators.required,
-          Validators.minLength(5),
+          Validators.minLength(3),
         ]),
         lastname: new FormControl('', [
           Validators.required,
-          Validators.minLength(5),
+          Validators.minLength(3),
         ]),
         email: new FormControl('', [Validators.required, Validators.email]),
         password: this.password,
         confirm_password: this.confirmPassword,
         phone: new FormControl('', [
           Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(8),
+          Validators.minLength(10),
         ]),
         location: new FormControl('', [Validators.required]),
         des_location: new FormControl(''),
@@ -112,6 +111,7 @@ export class RegisterComponent implements OnInit {
   }
 
   async register() {
+    this.LoadingService.showLoading('crescent');
     const credentials = {
       email: this.user.email,
       password: this.user.password,
@@ -120,15 +120,32 @@ export class RegisterComponent implements OnInit {
       credentials.email,
       credentials.password
     ).catch((err) => {
-      console.log(err);
+      this.LoadingService.loading.dismiss();
+      const message = err.code;
+      switch (message) {
+        case 'auth/email-already-in-use':
+          this.ToastService.presentToast(
+            'Ya existe una cuenta registrada con el correo electrónico ingresado',
+            'alert-circle-outline',
+            'warning-toast'
+          );
+          break;
+        default:
+          this.ToastService.presentToast(
+            'Hubo un error, por favor vuelta a intentarlo',
+            'close-circle-outline',
+            'danger-toast'
+          );
+          break;
+      }
     });
+
     const UID = await this.FireauthService.getUID();
     this.user.id = UID;
     this.addUser();
   }
 
   async addUser() {
-    this.LoadingService.showLoading('crescent');
     const name = this.user.name + '_' + this.user.lastname;
     const res = await this.FirestorageService.uploadFile(
       this.file,
@@ -136,7 +153,7 @@ export class RegisterComponent implements OnInit {
       name
     );
     this.user.img_profile = res;
-    this.FirestoreService.addDoc(this.user, this.path, this.user.id)
+    await this.FirestoreService.addDoc(this.user, this.path, this.user.id)
       .then((res) => {
         this.FireauthService.sendCheckMail();
         this.LoadingService.loading.dismiss().then(() => {
@@ -150,6 +167,8 @@ export class RegisterComponent implements OnInit {
       })
       .catch((err) => {
         this.LoadingService.loading.dismiss();
+        const message = err.code;
+        console.log(message);
         this.ToastService.presentToast(
           'Hubo un error, por favor vuelta a intentarlo',
           'close-circle-outline',
