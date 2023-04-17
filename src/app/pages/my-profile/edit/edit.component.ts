@@ -48,6 +48,8 @@ export class EditComponent implements OnInit {
 
   public uid: any = '';
 
+  public current_user: any = '';
+
   passwordsMatching = false;
   isConfirmPasswordDirty = false;
   password = new FormControl('', [
@@ -77,24 +79,22 @@ export class EditComponent implements OnInit {
       {
         name: new FormControl('', [
           Validators.required,
-          Validators.minLength(5),
+          Validators.minLength(3),
         ]),
         lastname: new FormControl('', [
           Validators.required,
-          Validators.minLength(5),
+          Validators.minLength(3),
         ]),
         email: new FormControl('', [Validators.required, Validators.email]),
         password: this.password,
         confirm_password: this.confirmPassword,
-        type: new FormControl('', [Validators.required]),
         phone: new FormControl('', [
           Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(8),
+          Validators.minLength(10),
         ]),
         location: new FormControl('', [Validators.required]),
         des_location: new FormControl(''),
-        image: new FormControl('', [Validators.required]),
+        img_profile: new FormControl('', [Validators.required]),
       },
       {
         validators: this.confirmedValidator('password', 'confirm_password'),
@@ -104,8 +104,9 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.FireauthService.stateAuth().subscribe((res) => {
+      this.current_user = res;
       this.uid = res?.uid;
-      if(this.uid !== null){
+      if (this.uid !== null) {
         this.FirestoreService.getDoc(this.path, this.uid).subscribe((res) => {
           this.userRef = res;
           this.image = this.userRef.img_profile;
@@ -154,6 +155,14 @@ export class EditComponent implements OnInit {
     }
     this.FirestoreService.updateDoc(user, this.path, user.id)
       .then((res) => {
+        this.FireauthService.updateAuthData(
+          user.email,
+          user.password
+        ).then((res) => {
+          this.FireauthService.sendCheckMail();
+        }).catch((err) => {
+          console.log(err);
+        });
         this.LoadingService.loading.dismiss().then(() => {
           this.goBack();
         });

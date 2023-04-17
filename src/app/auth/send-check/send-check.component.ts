@@ -46,12 +46,24 @@ export class SendCheckComponent implements OnInit {
         );
       })
       .catch((err) => {
+        const message = err.code;
         this.LoadingService.loading.dismiss();
-        this.ToastService.presentToast(
-          'Hubo un error, por favor vuelta a intentarlo',
-          'close-circle-outline',
-          'danger-toast'
-        );
+        switch(message){
+          case 'auth/too-many-requests':
+            this.ToastService.presentToast(
+              'Ha reenviado el correo demasiadas veces',
+              'alert-circle-outline',
+              'warning-toast'
+            );
+            break;
+          default:
+            this.ToastService.presentToast(
+              'Hubo un error, por favor vuelta a intentarlo',
+              'close-circle-outline',
+              'danger-toast'
+            );
+            break;
+        }
       });
   }
 

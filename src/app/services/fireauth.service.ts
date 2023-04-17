@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { updateEmail, updatePassword, getAuth } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 
 @Injectable({
@@ -31,7 +32,7 @@ export class FireauthService {
     }
   }
 
-  stateAuth(){
+  stateAuth() {
     return this.Auth.authState;
   }
 
@@ -48,13 +49,19 @@ export class FireauthService {
   }
 
   async sendCheckMail(): Promise<void> {
-    return await this.Auth.currentUser
-      .then((user) => {
-        return user?.sendEmailVerification();
-      });
+    return await this.Auth.currentUser.then((user) => {
+      return user?.sendEmailVerification();
+    });
   }
 
   async forgotPassword(email: string): Promise<void> {
     return await this.Auth.sendPasswordResetEmail(email);
+  }
+
+  async updateAuthData(email: string, password: string): Promise<void> {
+    const user: any = getAuth().currentUser;
+    console.log(user);
+    await updateEmail(user, email);
+    await updatePassword(user, password);
   }
 }
