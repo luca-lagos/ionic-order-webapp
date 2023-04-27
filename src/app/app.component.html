@@ -27,11 +27,7 @@
           <ion-label class="normal"> Productos</ion-label>
           <ion-icon name="pricetags-outline" slot="start"></ion-icon>
         </ion-item>
-        <ion-item
-          button="true"
-          detail="true"
-          [routerLink]="['/admin/users']"
-        >
+        <ion-item button="true" detail="true" [routerLink]="['/admin/users']">
           <ion-label class="normal"> Usuarios</ion-label>
           <ion-icon name="person-circle-outline" slot="start"></ion-icon>
         </ion-item>
@@ -45,7 +41,7 @@
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>Order webapp</ion-title>
-        <ion-buttons slot="end">
+        <ion-buttons slot="end" *ngIf="current_user === null">
           <ion-button
             [routerLink]="['/auth/login']"
             [ngStyle]="{
@@ -55,9 +51,23 @@
               paddingRight: '10px'
             }"
           >
-          <ion-icon name="log-in-outline"></ion-icon>
+            <ion-icon name="log-in-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end" *ngIf="current_user !== null">
+          <ion-button
+            [routerLink]="['/my-profile']"
+            [ngStyle]="{
+              width: '280px',
+              height: '70px',
+              fontSize: '22px'
+            }"
+          >
+            <img src="" alt="" srcset="" />
+            <p>Mi perfil</p>
           </ion-button>
           <ion-button
+            (click)="logOut()"
             [ngStyle]="{
               width: '70px',
               height: '70px',
@@ -65,7 +75,7 @@
               paddingRight: '10px'
             }"
           >
-          <ion-icon name="log-out-outline"></ion-icon>
+            <ion-icon name="log-out-outline"></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>

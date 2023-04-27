@@ -71,6 +71,11 @@ export class LoginComponent implements OnInit {
             if (res.user?.emailVerified) {
               this.LoadingService.loading.dismiss();
               this.navCtrl.navigateRoot('');
+              this.ToastService.presentToast(
+                'Bienvenido/a al sistema',
+                'checkmark-circle-outline',
+                'success-toast'
+              );
             } else {
               this.LoadingService.loading.dismiss();
               this.FireauthService.logOut();

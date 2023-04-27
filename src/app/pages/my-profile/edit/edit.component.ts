@@ -102,7 +102,7 @@ export class EditComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.FireauthService.stateAuth().subscribe((res) => {
       this.current_user = res;
       this.uid = res?.uid;
