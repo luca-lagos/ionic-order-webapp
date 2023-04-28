@@ -39,7 +39,13 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.FireauthService.stateAuth().subscribe((res) => {
+      if (res !== null) {
+        this.navCtrl.navigateRoot('');
+      }
+    });
+  }
 
   onSubmit() {
     this.LoadingService.showLoading('crescent');

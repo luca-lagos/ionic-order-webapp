@@ -48,7 +48,7 @@ export class SendCheckComponent implements OnInit {
       .catch((err) => {
         const message = err.code;
         this.LoadingService.loading.dismiss();
-        switch(message){
+        switch (message) {
           case 'auth/too-many-requests':
             this.ToastService.presentToast(
               'Ha reenviado el correo demasiadas veces',

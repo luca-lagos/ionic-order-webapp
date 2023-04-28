@@ -19,10 +19,6 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'home',
-    component: HomeComponent,
-  },
-  {
     path: 'auth/login',
     component: LoginComponent,
   },
@@ -84,7 +80,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: '',
     pathMatch: 'full',
   },
 ];

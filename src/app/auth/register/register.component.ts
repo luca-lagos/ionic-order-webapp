@@ -104,7 +104,13 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.FireauthService.stateAuth().subscribe((res) => {
+      if (res !== null) {
+        this.navCtrl.navigateRoot('');
+      }
+    });
+  }
 
   async onSubmit() {
     this.register();

@@ -53,7 +53,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.FireauthService.stateAuth().subscribe((res) => {
+      if (res !== null) {
+        this.navCtrl.navigateRoot('');
+      }
+    });
+  }
 
   onSubmit() {
     this.LoadingService.showLoading('crescent');
